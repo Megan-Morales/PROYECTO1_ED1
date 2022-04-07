@@ -44,8 +44,9 @@ namespace PROYECTO1_ED1.Controllers
                     Teléfono = int.Parse(collection["Teléfono"]),
                     ÚltimaConsulta = DateTime.Parse(collection["ÚltimaConsulta"]),
                     PróximaConsulta = DateTime.Parse(collection["PróximaConsulta"]),
-
-                })
+                    DescripciónTratamiento = collection["DescripciónTratamiento"]
+                });
+                return RedirectToAction(nameof(Index));
             }
             catch
             {

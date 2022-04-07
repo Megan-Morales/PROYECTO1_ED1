@@ -1,4 +1,5 @@
-﻿using PROYECTO1_ED1.Helpers;
+﻿using Lab03_ED_2022.Comparison;
+using PROYECTO1_ED1.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace PROYECTO1_ED1.Models
 {
+    
     public class ModeloPaciente
     {
         [Required]
@@ -22,10 +24,14 @@ namespace PROYECTO1_ED1.Models
         [Required]
         public DateTime ÚltimaConsulta { get; set; }
         public DateTime PróximaConsulta { get; set; }
-        public string DescriptionTratamiento { get; set; }
+        public string DescripciónTratamiento { get; set; }
 
         public static bool Guardar(ModeloPaciente datos)
         {
+            if ()
+            {
+
+            }
             Data.Instance.ÁrbolPacientes.Insert(datos);
             return true; 
         }

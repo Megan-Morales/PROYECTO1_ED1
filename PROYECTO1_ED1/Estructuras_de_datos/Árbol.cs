@@ -12,6 +12,8 @@ namespace Lab03_ED_2022.Estructuras_de_datos
     public class Árbol<T> : IEnumerable<T>, IEnumerable  // interfaz
     {
         public Compare<T> Comparar { get; set; }
+        public VerificarFecha<T> VerFecha { get; set; }
+
 
         public int ContadorRotaciones = 0;
         public int ComparacionesBusqueda = 0;

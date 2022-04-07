@@ -1,15 +1,26 @@
 ﻿
 
 using PROYECTO1_ED1.Models;
+using System;
 
 namespace Lab03_ED_2022.Comparison
 {
     public delegate int Compare<T>(T a, T b);
+    public delegate int VerificarFecha<T>(T a);
 
     public class Delegados
     {
-      
 
+        public static int VerificarFecha(ModeloPaciente a)
+        {
+            DateTime HoraActual = DateTime.Now;
+
+            if (DateTime.Compare(a.PróximaConsulta,HoraActual) < 0) 
+            {
+                return 1; 
+            }
+            return 0; 
+        }
         public static int CompareString(string a, string b)
         {
             if (a != b)
