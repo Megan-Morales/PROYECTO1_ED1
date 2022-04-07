@@ -11,7 +11,8 @@ namespace Lab03_ED_2022.Estructuras_de_datos
 {
     public class Árbol<T> : IEnumerable<T>, IEnumerable  // interfaz
     {
-        public Compare<T> comparar { get; set; }
+        public Compare<T> Comparar { get; set; }
+
         public int ContadorRotaciones = 0;
         public int ComparacionesBusqueda = 0;
         public static Stopwatch tiempoOrdenamientoAvl = new Stopwatch();
@@ -29,7 +30,7 @@ namespace Lab03_ED_2022.Estructuras_de_datos
         /*Metodo de insertar un nuevo nodo (inserción).
          * Cuando no existe raíz en el árbol
          */
-        public void insert(T value)
+        public void Insert(T value)
         {
 
             Nodo<T> newNode = new Nodo<T>(value);
@@ -41,25 +42,25 @@ namespace Lab03_ED_2022.Estructuras_de_datos
             else
             {
                 tiempoOrdenamientoAvl.Start();
-                this.root = this.insertNode(this.root, newNode);
+                this.root = this.InsertNode(this.root, newNode);
                 tiempoOrdenamientoAvl.Stop();
                 x += tiempoOrdenamientoAvl.Elapsed.TotalMilliseconds;
             }
 
         }
 
-        public Nodo<T> insertNode(Nodo<T> actualroot, Nodo<T> newNode) //Metodo para insertar un nodo sino 
+        public Nodo<T> InsertNode(Nodo<T> actualroot, Nodo<T> newNode) //Metodo para insertar un nodo sino 
         {
             if (actualroot != null)//recorrer las hojas o hijos
             {
-                if (comparar(newNode.value, actualroot.value) < 0)//Cuando es menor
+                if (Comparar(newNode.value, actualroot.value) < 0)//Cuando es menor
                 {
-                    actualroot.left = this.insertNode(actualroot.left, newNode);//se manda a la nodo izquierdo
+                    actualroot.left = this.InsertNode(actualroot.left, newNode);//se manda a la nodo izquierdo
                     //Factor de balanceo
                     if (this.node_Height(actualroot.right) - this.node_Height(actualroot.left) == -2)
                     {
                         //Entra a rotacion simple derecha
-                        if (comparar(newNode.value, actualroot.left.value) < 0)
+                        if (Comparar(newNode.value, actualroot.left.value) < 0)
                         {
                             //Si L-L Rotación simple derecha
                             actualroot = this.right_Rotation(actualroot);
@@ -70,13 +71,13 @@ namespace Lab03_ED_2022.Estructuras_de_datos
                         }
                     }
                 }
-                else if (comparar(newNode.value, actualroot.value) > 0) //cuando es mayor
+                else if (Comparar(newNode.value, actualroot.value) > 0) //cuando es mayor
                 {
-                    actualroot.right = this.insertNode(actualroot.right, newNode);//se manda a la nodo derecho
+                    actualroot.right = this.InsertNode(actualroot.right, newNode);//se manda a la nodo derecho
                     if (this.node_Height(actualroot.right) - this.node_Height(actualroot.left) == 2) //validaciones de balanceo
                     {
                         //Entra a rotacion izquierda
-                        if (comparar(newNode.value, actualroot.right.value) > 0)
+                        if (Comparar(newNode.value, actualroot.right.value) > 0)
                         {
                             //Entra a rotacion izquerda 
                             actualroot = this.left_Rotation(actualroot);
@@ -158,10 +159,9 @@ namespace Lab03_ED_2022.Estructuras_de_datos
             return aux_Node;
         }
 
-        public T Buscar(T valor)
-        {
-            return Buscar(valor, root);
-        }
+       
+
+       
 
         private T Buscar(T elemento, Nodo<T> raiz)
         {
@@ -172,12 +172,12 @@ namespace Lab03_ED_2022.Estructuras_de_datos
                 ComparacionesBusqueda++;
                 return default(T);
             }
-            else if (comparar(elemento, aux_Node.value) == 0)
+            else if (Comparar(elemento, aux_Node.value) == 0)
             {
                 ComparacionesBusqueda++;
                 return aux_Node.value;
             }
-            else if (comparar(elemento, aux_Node.value) < 0)
+            else if (Comparar(elemento, aux_Node.value) < 0)
             {
                 ComparacionesBusqueda++;
                 return Buscar(elemento, aux_Node.left);

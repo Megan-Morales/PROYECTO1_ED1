@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PROYECTO1_ED1.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,7 +10,9 @@ namespace PROYECTO1_ED1.Models
     public class ModeloPaciente
     {
         [Required]
-        public string Nombre { get; set; }
+        public string Nombres { get; set; }
+        [Required]
+        public string Apellidos { get; set; }
         [Required]
         public long DPI { get; set; }
         [Required]
@@ -21,5 +24,10 @@ namespace PROYECTO1_ED1.Models
         public DateTime PróximaConsulta { get; set; }
         public string DescriptionTratamiento { get; set; }
 
+        public static bool Guardar(ModeloPaciente datos)
+        {
+            Data.Instance.ÁrbolPacientes.Insert(datos);
+            return true; 
+        }
     }
 }
