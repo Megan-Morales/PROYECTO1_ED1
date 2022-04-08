@@ -28,10 +28,9 @@ namespace PROYECTO1_ED1.Models
 
         public static bool Guardar(ModeloPaciente datos)
         {
-            if ()
-            {
+            
 
-            }
+            
             Data.Instance.ÁrbolPacientes.Insert(datos);
             return true; 
         }
