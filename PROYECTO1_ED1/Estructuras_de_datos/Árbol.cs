@@ -1,11 +1,7 @@
-﻿using System;
+﻿using Lab03_ED_2022.Comparison;
+using Lab03_ED_2022.Estructura_de_Datos;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Lab03_ED_2022.Comparison;
-using Lab03_ED_2022.Estructura_de_Datos;
 
 namespace Lab03_ED_2022.Estructuras_de_datos
 {
@@ -14,11 +10,6 @@ namespace Lab03_ED_2022.Estructuras_de_datos
         public Compare<T> Comparar { get; set; }
         public VerificarFecha<T> VerFecha { get; set; }
 
-
-        public int ContadorRotaciones = 0;
-        public int ComparacionesBusqueda = 0;
-        public static Stopwatch tiempoOrdenamientoAvl = new Stopwatch();
-        public double x = 0;
         //Varible
         Nodo<T> root;
 
@@ -43,10 +34,7 @@ namespace Lab03_ED_2022.Estructuras_de_datos
             }
             else
             {
-                tiempoOrdenamientoAvl.Start();
                 this.root = this.InsertNode(this.root, newNode);
-                tiempoOrdenamientoAvl.Stop();
-                x += tiempoOrdenamientoAvl.Elapsed.TotalMilliseconds;
             }
 
         }
@@ -59,39 +47,39 @@ namespace Lab03_ED_2022.Estructuras_de_datos
                 {
                     actualroot.left = this.InsertNode(actualroot.left, newNode);//se manda a la nodo izquierdo
                     //Factor de balanceo
-                    if (this.node_Height(actualroot.right) - this.node_Height(actualroot.left) == -2)
+                    if (this.Node_Height(actualroot.right) - this.Node_Height(actualroot.left) == -2)
                     {
                         //Entra a rotacion simple derecha
                         if (Comparar(newNode.value, actualroot.left.value) < 0)
                         {
                             //Si L-L Rotación simple derecha
-                            actualroot = this.right_Rotation(actualroot);
+                            actualroot = this.Right_Rotation(actualroot);
                         }
                         else //rotacion left-right
                         {
-                            actualroot = this.left_Right_Rotation(actualroot);
+                            actualroot = this.Left_Right_Rotation(actualroot);
                         }
                     }
                 }
                 else if (Comparar(newNode.value, actualroot.value) > 0) //cuando es mayor
                 {
                     actualroot.right = this.InsertNode(actualroot.right, newNode);//se manda a la nodo derecho
-                    if (this.node_Height(actualroot.right) - this.node_Height(actualroot.left) == 2) //validaciones de balanceo
+                    if (this.Node_Height(actualroot.right) - this.Node_Height(actualroot.left) == 2) //validaciones de balanceo
                     {
                         //Entra a rotacion izquierda
                         if (Comparar(newNode.value, actualroot.right.value) > 0)
                         {
                             //Entra a rotacion izquerda 
-                            actualroot = this.left_Rotation(actualroot);
+                            actualroot = this.Left_Rotation(actualroot);
                         }
                         else //rotacion right - left
                         {
-                            actualroot = this.right_Left_Rotation(actualroot);
+                            actualroot = this.Right_Left_Rotation(actualroot);
                         }
                     }
                 }
                 else { }
-                actualroot.height = this.max_Height(this.node_Height(actualroot.right), this.node_Height(actualroot.left)) + 1;
+                actualroot.height = this.Max_Height(this.Node_Height(actualroot.right), this.Node_Height(actualroot.left)) + 1;
                 return actualroot;
             }
             else
@@ -103,7 +91,7 @@ namespace Lab03_ED_2022.Estructuras_de_datos
         }
 
         //Para retornar la altura de los nodos
-        public int node_Height(Nodo<T> node)
+        public int Node_Height(Nodo<T> node)
         {
             if (node != null)
             {
@@ -115,7 +103,7 @@ namespace Lab03_ED_2022.Estructuras_de_datos
             }
         }
         //Para comparar dos alturas y retorna la mayor
-        public int max_Height(int height1, int height2)
+        public int Max_Height(int height1, int height2)
         {
             if (height2 >= height1)
             {
@@ -128,65 +116,57 @@ namespace Lab03_ED_2022.Estructuras_de_datos
         }
 
         //Rotaciones
-        public Nodo<T> right_Rotation(Nodo<T> node) //rotacion simple izquierda
+        public Nodo<T> Right_Rotation(Nodo<T> node) //rotacion simple izquierda
         {
             Nodo<T> aux_Node = node.left;
             node.left = aux_Node.right;
             aux_Node.right = node;
-            node.height = this.max_Height(this.node_Height(node.right), this.node_Height(node.left)) + 1;
-            aux_Node.height = this.max_Height(node.height, this.node_Height(node.left)) + 1;
-            ContadorRotaciones++;
+            node.height = this.Max_Height(this.Node_Height(node.right), this.Node_Height(node.left)) + 1;
+            aux_Node.height = this.Max_Height(node.height, this.Node_Height(node.left)) + 1;
             return aux_Node;
         }
-        public Nodo<T> left_Rotation(Nodo<T> node) //rotacion simple derecha
+        public Nodo<T> Left_Rotation(Nodo<T> node) //rotacion simple derecha
         {
             Nodo<T> aux_Node = node.right;
             node.right = aux_Node.left;
             aux_Node.left = node;
-            node.height = this.max_Height(this.node_Height(node.left), this.node_Height(node.right)) + 1;
-            aux_Node.height = this.max_Height(node.height, this.node_Height(node.right)) + 1;
-            ContadorRotaciones++;
+            node.height = this.Max_Height(this.Node_Height(node.left), this.Node_Height(node.right)) + 1;
+            aux_Node.height = this.Max_Height(node.height, this.Node_Height(node.right)) + 1;
             return aux_Node;
         }
-        public Nodo<T> left_Right_Rotation(Nodo<T> node) //rotacion izquierda - derecha
+        public Nodo<T> Left_Right_Rotation(Nodo<T> node) //rotacion izquierda - derecha
         {
-            node.left = this.left_Rotation(node.left);
-            Nodo<T> aux_Node = this.right_Rotation(node);
+            node.left = this.Left_Rotation(node.left);
+            Nodo<T> aux_Node = this.Right_Rotation(node);
             return aux_Node;
         }
-        public Nodo<T> right_Left_Rotation(Nodo<T> node) //rotacion derecha - izquierda
+        public Nodo<T> Right_Left_Rotation(Nodo<T> node) //rotacion derecha - izquierda
         {
-            node.right = this.right_Rotation(node.right);
-            Nodo<T> aux_Node = this.left_Rotation(node);
+            node.right = this.Right_Rotation(node.right);
+            Nodo<T> aux_Node = this.Left_Rotation(node);
             return aux_Node;
         }
-
-       
-
-       
-
         private T Buscar(T elemento, Nodo<T> raiz)
         {
             Nodo<T> aux_Node = raiz;
 
             if (aux_Node == null)
             {
-                ComparacionesBusqueda++;
+
                 return default(T);
             }
             else if (Comparar(elemento, aux_Node.value) == 0)
             {
-                ComparacionesBusqueda++;
+
                 return aux_Node.value;
             }
             else if (Comparar(elemento, aux_Node.value) < 0)
             {
-                ComparacionesBusqueda++;
+
                 return Buscar(elemento, aux_Node.left);
             }
             else
             {
-                ComparacionesBusqueda++;
                 return Buscar(elemento, aux_Node.right);
             }
         }
@@ -220,25 +200,5 @@ namespace Lab03_ED_2022.Estructuras_de_datos
             return GetEnumerator();
         }
 
-        public int Rotaciones()
-        {
-            return ContadorRotaciones;
-        }
-
-        public int Profundidad()
-        {
-            return this.root.height;
-        }
-
-        public int Comparaciones()
-        {
-            return ComparacionesBusqueda;
-        }
-
-        public double TiempoDeOrdenamientoAvl()
-        {
-
-            return x;
-        }
     }
 }
