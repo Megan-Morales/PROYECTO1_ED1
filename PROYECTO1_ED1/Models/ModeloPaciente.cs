@@ -28,9 +28,6 @@ namespace PROYECTO1_ED1.Models
 
         public static bool Guardar(ModeloPaciente datos)
         {
-            
-
-            
             Singleton.Instance.ÁrbolPacientes.Insert(datos);
             return true; 
         }

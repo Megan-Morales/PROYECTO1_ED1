@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace PROYECTO1_ED1.Helpers
 {
-    public class Data
+    public class Singleton
     {
         //anti patrón singleton 
-        private static Data _instance = null;
-        public static Data Instance
+        private static Singleton _instance = null;
+        public static Singleton Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new Data();
+                    _instance = new Singleton();
                 }
                 return _instance;
             }
