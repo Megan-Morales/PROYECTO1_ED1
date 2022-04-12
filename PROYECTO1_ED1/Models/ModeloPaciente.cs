@@ -31,7 +31,7 @@ namespace PROYECTO1_ED1.Models
             
 
             
-            Data.Instance.ÁrbolPacientes.Insert(datos);
+            Singleton.Instance.ÁrbolPacientes.Insert(datos);
             return true; 
         }
     }
