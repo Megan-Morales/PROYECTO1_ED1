@@ -39,14 +39,15 @@ namespace PROYECTO1_ED1.Controllers
                 {
                     Nombres = collection["Nombres"],
                     Apellidos = collection["Apellidos"],
-                    DPI = int.Parse(collection["DPI"]),
+                    DPI = long.Parse(collection["DPI"]),
                     Edad = int.Parse(collection["Edad"]),
-                    Teléfono = int.Parse(collection["Teléfono"]),
+                    Teléfono = long.Parse(collection["Teléfono"]),
                     ÚltimaConsulta = DateTime.Parse(collection["ÚltimaConsulta"]),
                     PróximaConsulta = DateTime.Parse(collection["PróximaConsulta"]),
-                    DescripciónTratamiento = collection["DescripciónTratamiento"]
+                    DescripciónTratamiento = collection["DescripciónTratamiento"],
                 });
                 return RedirectToAction(nameof(Index));
+                //poner throw exception para una pantalla de error 
             }
             catch
             {
