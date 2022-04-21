@@ -28,9 +28,14 @@ namespace PROYECTO1_ED1.Models
 
         public static bool Guardar(ModeloPaciente datos)
         {
-         
-            Data.Instance.ÁrbolPacientes.Insert(datos);
-            return true; 
+            if (Data.Instance.ÁrbolPacientes.VerificarProxFecha(datos) == true)
+            {
+                Data.Instance.ÁrbolPacientes.Insert(datos);
+                return true;
+            }
+
+            return false; 
+            
         }
     }
 }

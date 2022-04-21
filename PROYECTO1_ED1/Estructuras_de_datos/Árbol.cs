@@ -8,10 +8,22 @@ namespace Lab03_ED_2022.Estructuras_de_datos
     public class Árbol<T> : IEnumerable<T>, IEnumerable  // interfaz
     {
         public Compare<T> Comparar { get; set; }
+        public VerificarFecha<T> CompararFecha { get; set; }
         public VerificarFecha<T> VerFecha { get; set; }
 
         //Varible
         Nodo<T> root;
+
+        public bool VerificarProxFecha(T valor)
+        {
+            if(CompararFecha(valor) == 1)
+            {
+                return false;
+                    
+            }
+
+            return true;
+        }
 
         //Contructor de mi clase
         public Árbol()

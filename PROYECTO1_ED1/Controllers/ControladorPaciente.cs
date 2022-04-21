@@ -33,26 +33,25 @@ namespace PROYECTO1_ED1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
         {
-            try
+
+
+            if (ModeloPaciente.Guardar(new ModeloPaciente
             {
-                ModeloPaciente.Guardar(new ModeloPaciente
-                {
-                    Nombres = collection["Nombres"],
-                    Apellidos = collection["Apellidos"],
-                    DPI = long.Parse(collection["DPI"]),
-                    Edad = int.Parse(collection["Edad"]),
-                    Teléfono = long.Parse(collection["Teléfono"]),
-                    ÚltimaConsulta = DateTime.Parse(collection["ÚltimaConsulta"]),
-                    PróximaConsulta = DateTime.Parse(collection["PróximaConsulta"]),
-                    DescripciónTratamiento = collection["DescripciónTratamiento"],
-                });
+                Nombres = collection["Nombres"],
+                Apellidos = collection["Apellidos"],
+                DPI = long.Parse(collection["DPI"]),
+                Edad = int.Parse(collection["Edad"]),
+                Teléfono = long.Parse(collection["Teléfono"]),
+                ÚltimaConsulta = DateTime.Parse(collection["ÚltimaConsulta"]),
+                PróximaConsulta = DateTime.Parse(collection["PróximaConsulta"]),
+                DescripciónTratamiento = collection["DescripciónTratamiento"],
+            }) == true)
+            {
                 return RedirectToAction(nameof(Index));
                 //poner throw exception para una pantalla de error 
             }
-            catch
-            {
-                return View();
-            }
+            return View();
+            
         }
 
         // GET: ControladorPaciente/Edit/5
