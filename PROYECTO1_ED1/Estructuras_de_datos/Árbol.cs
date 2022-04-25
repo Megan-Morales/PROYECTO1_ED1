@@ -104,7 +104,11 @@ namespace Lab03_ED_2022.Estructuras_de_datos
                     if (actualroot.totalConsultas <= 8)
                     {
                         actualroot.totalConsultas++;
-                        return default; 
+                        return actualroot;
+                    }
+                    else
+                    {
+                        return default;
                     }
 
                 }

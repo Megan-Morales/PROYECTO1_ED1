@@ -32,8 +32,7 @@ namespace PROYECTO1_ED1.Models
 
             if (Data.Instance.ÁrbolPacientes.VerificarProxFecha(datos) == true && Data.Instance.FechasdeConsulta.Insert(datos) == true)
             {
-                Data.Instance.ÁrbolPacientes.Insert(datos);
-                
+                Data.Instance.ÁrbolPacientes.Insert(datos);  
                 return true;
             }
 

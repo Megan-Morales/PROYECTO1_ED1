@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PROYECTO1_ED1.Helpers;
 using PROYECTO1_ED1.Models;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace PROYECTO1_ED1.Controllers
         // GET: ControladorPaciente
         public ActionResult Index()
         {
-            return View();
+            return View(Data.Instance.ÁrbolPacientes);
         }
 
         //vista para mostrar error con las fechas
