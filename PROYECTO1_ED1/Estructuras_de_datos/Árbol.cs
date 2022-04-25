@@ -49,14 +49,30 @@ namespace Lab03_ED_2022.Estructuras_de_datos
             }
             else
             {
-                if ((this.root = this.InsertNode(this.root, newNode)) == default )
+                //verificar la fecha de la raíz para ver que no hallan más de 8 
+                if (Comparar(root.value, newNode.value) == 0)
+                {
+                    if (root.totalConsultas < 8)
+                    {
+                        root.totalConsultas++;
+                        return true;
+                    }
+                    else
+                    {
+                        //si hay más de 8 citas agendadas en la raiz entonces pedir cambio 
+                        return false;
+                    }
+                }
+               
+                
+                if ((this.root = this.InsertNode(this.root, newNode)) == default)
                 {
                     return false;
                 }
-               
+
                 return true;
             }
-           
+
 
         }
 
@@ -208,7 +224,7 @@ namespace Lab03_ED_2022.Estructuras_de_datos
             }
         }
 
-        
+
 
         private void InOrder(Nodo<T> padre, ref ColaRecorrido<T> queue)
         {

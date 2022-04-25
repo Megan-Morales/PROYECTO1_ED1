@@ -57,7 +57,7 @@ namespace PROYECTO1_ED1.Controllers
             }) == true)
             {
                 return RedirectToAction(nameof(Index));
-                //poner throw exception para una pantalla de error 
+                
             }
             return RedirectToAction(nameof(Error)); 
             
