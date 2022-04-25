@@ -8,18 +8,20 @@ namespace Lab03_ED_2022.Estructuras_de_datos
     public class Árbol<T> : IEnumerable<T>, IEnumerable  // interfaz
     {
         public Compare<T> Comparar { get; set; }
+
         public VerificarFecha<T> CompararFecha { get; set; }
         public VerificarFecha<T> VerFecha { get; set; }
 
         //Varible
         Nodo<T> root;
 
+
         public bool VerificarProxFecha(T valor)
         {
-            if(CompararFecha(valor) == 1)
+            if (CompararFecha(valor) == 1)
             {
                 return false;
-                    
+
             }
 
             return true;
@@ -35,7 +37,7 @@ namespace Lab03_ED_2022.Estructuras_de_datos
         /*Metodo de insertar un nuevo nodo (inserción).
          * Cuando no existe raíz en el árbol
          */
-        public void Insert(T value)
+        public bool Insert(T value)
         {
 
             Nodo<T> newNode = new Nodo<T>(value);
@@ -43,11 +45,18 @@ namespace Lab03_ED_2022.Estructuras_de_datos
             if (this.root == null)
             {
                 this.root = newNode;
+                return true;
             }
             else
             {
-                this.root = this.InsertNode(this.root, newNode);
+                if ((this.root = this.InsertNode(this.root, newNode)) == default )
+                {
+                    return false;
+                }
+               
+                return true;
             }
+           
 
         }
 
@@ -90,7 +99,15 @@ namespace Lab03_ED_2022.Estructuras_de_datos
                         }
                     }
                 }
-                else { }
+                else //cuando son iguales las fechas, sumar 1 al contador si es mayor a 8 error  
+                {
+                    if (actualroot.totalConsultas <= 8)
+                    {
+                        actualroot.totalConsultas++;
+                        return default; 
+                    }
+
+                }
                 actualroot.height = this.Max_Height(this.Node_Height(actualroot.right), this.Node_Height(actualroot.left)) + 1;
                 return actualroot;
             }
@@ -100,6 +117,11 @@ namespace Lab03_ED_2022.Estructuras_de_datos
                 return actualroot;
             }
 
+        }
+
+        public bool ReturnFalse()
+        {
+            return false;
         }
 
         //Para retornar la altura de los nodos
@@ -164,7 +186,6 @@ namespace Lab03_ED_2022.Estructuras_de_datos
 
             if (aux_Node == null)
             {
-
                 return default(T);
             }
             else if (Comparar(elemento, aux_Node.value) == 0)
@@ -182,6 +203,8 @@ namespace Lab03_ED_2022.Estructuras_de_datos
                 return Buscar(elemento, aux_Node.right);
             }
         }
+
+        
 
         private void InOrder(Nodo<T> padre, ref ColaRecorrido<T> queue)
         {

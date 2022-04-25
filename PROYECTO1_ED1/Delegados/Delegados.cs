@@ -22,7 +22,14 @@ namespace Lab03_ED_2022.Comparison
             return 0; 
         }
 
-
+        public static int BuscarFecha(ModeloPaciente a, ModeloPaciente b)
+        {
+            if (a.PróximaConsulta == b.PróximaConsulta)
+            {
+                return 1;
+            }
+            return 0;
+        }
        
 
         public static int CompararDPI(ModeloPaciente a, ModeloPaciente b)
@@ -41,6 +48,28 @@ namespace Lab03_ED_2022.Comparison
             }
             else
             {
+                return 0;
+            }
+        
+        }
+
+        public static int CompararFecha(ModeloPaciente a, ModeloPaciente b)
+        {
+
+            if (a.PróximaConsulta != b.PróximaConsulta)
+            {
+                if (a.PróximaConsulta < b.PróximaConsulta)
+                {
+                    return -1;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+            else
+            {
+                
                 return 0;
             }
         }

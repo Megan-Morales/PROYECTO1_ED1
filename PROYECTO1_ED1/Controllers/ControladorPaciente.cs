@@ -16,6 +16,14 @@ namespace PROYECTO1_ED1.Controllers
             return View();
         }
 
+        //vista para mostrar error con las fechas
+        public ActionResult Error()
+        {
+            return View();
+        }
+
+
+
         // GET: ControladorPaciente/Details/5
         public ActionResult Details(int id)
         {
@@ -50,7 +58,7 @@ namespace PROYECTO1_ED1.Controllers
                 return RedirectToAction(nameof(Index));
                 //poner throw exception para una pantalla de error 
             }
-            return View();
+            return RedirectToAction(nameof(Error)); 
             
         }
 

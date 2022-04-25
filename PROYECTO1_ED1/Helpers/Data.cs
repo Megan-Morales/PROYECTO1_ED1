@@ -27,8 +27,16 @@ namespace PROYECTO1_ED1.Helpers
         public Árbol<ModeloPaciente> ÁrbolPacientes = new Árbol<ModeloPaciente>
         {
             Comparar = Delegados.CompararDPI,
-            CompararFecha = Delegados.VerificarFecha
+            CompararFecha = Delegados.VerificarFecha,
            
+           
+        };
+
+        //arbol para guardar las fechas de consulta 
+        public Árbol<ModeloPaciente> FechasdeConsulta = new Árbol<ModeloPaciente>
+        {
+            Comparar = Delegados.CompararFecha,
+            CompararFecha = Delegados.VerificarFecha,
         };
     }
 }
