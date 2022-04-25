@@ -20,7 +20,7 @@ namespace PROYECTO1_ED1.Models
         [Required]
         public int Edad { get; set; }
         [Required]
-        public int Teléfono { get; set; }
+        public long Teléfono { get; set; }
         [Required]
         public DateTime ÚltimaConsulta { get; set; }
         public DateTime PróximaConsulta { get; set; }
@@ -30,9 +30,14 @@ namespace PROYECTO1_ED1.Models
         {
             
 
+            if (Data.Instance.ÁrbolPacientes.VerificarProxFecha(datos) == true && Data.Instance.FechasdeConsulta.Insert(datos) == true)
+            {
+                Data.Instance.ÁrbolPacientes.Insert(datos);  
+                return true;
+            }
+
+            return false; 
             
-            Data.Instance.ÁrbolPacientes.Insert(datos);
-            return true; 
         }
     }
 }

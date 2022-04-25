@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PROYECTO1_ED1.Helpers;
 using PROYECTO1_ED1.Models;
 using System;
 using System.Collections.Generic;
@@ -13,8 +14,16 @@ namespace PROYECTO1_ED1.Controllers
         // GET: ControladorPaciente
         public ActionResult Index()
         {
+            return View(Data.Instance.ÁrbolPacientes);
+        }
+
+        //vista para mostrar error con las fechas
+        public ActionResult Error()
+        {
             return View();
         }
+
+
 
         // GET: ControladorPaciente/Details/5
         public ActionResult Details(int id)
@@ -33,25 +42,25 @@ namespace PROYECTO1_ED1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
         {
-            try
+
+
+            if (ModeloPaciente.Guardar(new ModeloPaciente
             {
-                ModeloPaciente.Guardar(new ModeloPaciente
-                {
-                    Nombres = collection["Nombres"],
-                    Apellidos = collection["Apellidos"],
-                    DPI = int.Parse(collection["DPI"]),
-                    Edad = int.Parse(collection["Edad"]),
-                    Teléfono = int.Parse(collection["Teléfono"]),
-                    ÚltimaConsulta = DateTime.Parse(collection["ÚltimaConsulta"]),
-                    PróximaConsulta = DateTime.Parse(collection["PróximaConsulta"]),
-                    DescripciónTratamiento = collection["DescripciónTratamiento"]
-                });
+                Nombres = collection["Nombres"],
+                Apellidos = collection["Apellidos"],
+                DPI = long.Parse(collection["DPI"]),
+                Edad = int.Parse(collection["Edad"]),
+                Teléfono = long.Parse(collection["Teléfono"]),
+                ÚltimaConsulta = DateTime.Parse(collection["ÚltimaConsulta"]),
+                PróximaConsulta = DateTime.Parse(collection["PróximaConsulta"]),
+                DescripciónTratamiento = collection["DescripciónTratamiento"],
+            }) == true)
+            {
                 return RedirectToAction(nameof(Index));
+                
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Error)); 
+            
         }
 
         // GET: ControladorPaciente/Edit/5

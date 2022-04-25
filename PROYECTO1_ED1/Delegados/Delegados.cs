@@ -21,45 +21,16 @@ namespace Lab03_ED_2022.Comparison
             }
             return 0; 
         }
-        public static int CompareString(string a, string b)
+
+        public static int BuscarFecha(ModeloPaciente a, ModeloPaciente b)
         {
-            if (a != b)
+            if (a.PróximaConsulta == b.PróximaConsulta)
             {
-                if (a.CompareTo(b) < 0)
-                {
-                    return -1;
-                }
-                else
-                {
-                    return 1;
-                }
+                return 1;
             }
-            else
-            {
-                return 0;
-            }
+            return 0;
         }
-
-        public static int CompareInt(int a, int b)
-        {
-            if (a != b)
-            {
-                if (a > b)
-                {
-                    return 1;
-                }
-                else
-                {
-                    return -1;
-                }
-            }
-            else
-            {
-
-                return 0;
-
-            }
-        }
+       
 
         public static int CompararDPI(ModeloPaciente a, ModeloPaciente b)
         {
@@ -77,6 +48,28 @@ namespace Lab03_ED_2022.Comparison
             }
             else
             {
+                return 0;
+            }
+        
+        }
+
+        public static int CompararFecha(ModeloPaciente a, ModeloPaciente b)
+        {
+
+            if (a.PróximaConsulta != b.PróximaConsulta)
+            {
+                if (a.PróximaConsulta < b.PróximaConsulta)
+                {
+                    return -1;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+            else
+            {
+                
                 return 0;
             }
         }
