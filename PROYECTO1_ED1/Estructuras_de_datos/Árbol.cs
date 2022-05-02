@@ -1,4 +1,4 @@
-﻿using Lab03_ED_2022.Comparison;
+﻿using Lab03_ED_2022.Delegados;
 using Lab03_ED_2022.Estructura_de_Datos;
 using System.Collections;
 using System.Collections.Generic;
@@ -200,6 +200,10 @@ namespace Lab03_ED_2022.Estructuras_de_datos
             Nodo<T> aux_Node = this.Left_Rotation(node);
             return aux_Node;
         }
+        public T Buscar(T valor)
+        {
+            return Buscar(valor, root);
+        }
         private T Buscar(T elemento, Nodo<T> raiz)
         {
             Nodo<T> aux_Node = raiz;
@@ -224,6 +228,25 @@ namespace Lab03_ED_2022.Estructuras_de_datos
             }
         }
 
+        //public T BuscarNombre(T elemento)
+        //{
+        //    return BuscarNombre(elemento, this.root);
+        //}
+
+        //private T BuscarNombre(T elemento, Nodo<T> padre)
+        //{
+        //    Nodo<T> auxiliar = padre;
+        //    if (padre != null)
+        //    {
+        //        if (Comparar)
+        //        {
+
+        //        }
+        //        queue.Encolar(padre.value);
+        //        InOrder(padre.right, ref queue);
+        //    }
+        //    return default(T);
+        //}
 
 
         private void InOrder(Nodo<T> padre, ref ColaRecorrido<T> queue)

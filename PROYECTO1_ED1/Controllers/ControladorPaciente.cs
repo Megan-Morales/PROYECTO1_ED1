@@ -36,6 +36,53 @@ namespace PROYECTO1_ED1.Controllers
         {
             return View();
         }
+        public ActionResult IndiceBusqueda()
+        {
+            //formulario para busquedas
+            return View(new ModeloPaciente());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult IndiceBusqueda(IFormCollection collection)
+        {
+            try
+            {
+
+
+                return View();
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult BusquedaDpi()
+        {
+            return View(new ModeloPaciente());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult BusquedaDpi(IFormCollection collection)
+        {
+            int parametro = (int.Parse(collection["DPI"]));
+            ModeloPaciente PacienteBuscado = new ModeloPaciente();
+            PacienteBuscado.DPI = parametro;
+
+            
+            if (Data.Instance.ÁrbolPacientes.Buscar(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro)) != default)
+            {
+                return View(Data.Instance.ÁrbolPacientes.Buscar(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro)));
+            }
+            else
+            {
+                //return RedirectToAction(nameof(ErrorBusqueda));
+                return null;
+
+            }
+        }
 
         // POST: ControladorPaciente/Create
         [HttpPost]

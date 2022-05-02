@@ -1,16 +1,13 @@
-﻿
-
-using PROYECTO1_ED1.Models;
+﻿using PROYECTO1_ED1.Models;
 using System;
 
-namespace Lab03_ED_2022.Comparison
+namespace Lab03_ED_2022.Delegados
 {
     public delegate int Compare<T>(T a, T b);
     public delegate int VerificarFecha<T>(T a);
 
-    public class Delegados
+    public class Delegado
     {
-
         public static int VerificarFecha(ModeloPaciente a)
         {
             DateTime HoraActual = DateTime.Now;
@@ -70,6 +67,25 @@ namespace Lab03_ED_2022.Comparison
             else
             {
                 
+                return 0;
+            }
+        }
+        public static int CompararNombre(ModeloPaciente a, ModeloPaciente b)
+        {
+
+            if (a.Nombres != b.Nombres)
+            {
+                if (a.Nombres.CompareTo(b.Nombres) < 0)
+                {
+                    return -1;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+            else
+            {
                 return 0;
             }
         }

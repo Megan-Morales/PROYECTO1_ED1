@@ -1,4 +1,4 @@
-﻿using Lab03_ED_2022.Comparison;
+﻿using Lab03_ED_2022.Delegados;
 using PROYECTO1_ED1.Helpers;
 using System;
 using System.Collections.Generic;

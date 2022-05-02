@@ -1,4 +1,4 @@
-﻿using Lab03_ED_2022.Comparison;
+﻿using Lab03_ED_2022.Delegados;
 using Lab03_ED_2022.Estructuras_de_datos;
 using PROYECTO1_ED1.Models;
 using System;
@@ -26,8 +26,8 @@ namespace PROYECTO1_ED1.Helpers
 
         public Árbol<ModeloPaciente> ÁrbolPacientes = new Árbol<ModeloPaciente>
         {
-            Comparar = Delegados.CompararDPI,
-            CompararFecha = Delegados.VerificarFecha,
+            Comparar = Delegado.CompararDPI,
+            CompararFecha = Delegado.VerificarFecha,
            
            
         };
@@ -35,8 +35,8 @@ namespace PROYECTO1_ED1.Helpers
         //arbol para guardar las fechas de consulta 
         public Árbol<ModeloPaciente> FechasdeConsulta = new Árbol<ModeloPaciente>
         {
-            Comparar = Delegados.CompararFecha,
-            CompararFecha = Delegados.VerificarFecha,
+            Comparar = Delegado.CompararFecha,
+            CompararFecha = Delegado.VerificarFecha,
         };
     }
 }

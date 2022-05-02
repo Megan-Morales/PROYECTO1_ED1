@@ -1,0 +1,46 @@
+﻿@model PROYECTO1_ED1.Models.ModeloPaciente
+
+@{
+    ViewData["Title"] = "IndiceBusqueda";
+}
+
+<h1>Buscar pacientes</h1>
+
+<h4>Ingrese el nombre completo del paciente</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateavlEmail">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Nombres" class="control-label"></label>
+                <input asp-for="Nombres" class="form-control" />
+                <span asp-validation-for="Nombres" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Buscar Nombres" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<h4>Ingrese el DPI del paciente</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="BusquedaDpi">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DPI" class="control-label"></label>
+                <input asp-for="DPI" class="form-control" />
+                <span asp-validation-for="DPI" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Buscar DPI" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
