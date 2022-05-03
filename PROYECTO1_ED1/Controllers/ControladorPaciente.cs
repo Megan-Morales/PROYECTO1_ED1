@@ -148,25 +148,86 @@ namespace PROYECTO1_ED1.Controllers
                 return View();
             }
         }
-
-        // GET: ControladorPaciente/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult IndiceEdicion()
         {
-            return View();
+            //formulario para busquedas
+            return View(new ModeloPaciente());
         }
 
-        // POST: ControladorPaciente/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult IndiceEdicion(IFormCollection collection)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+
+
+                return View();
             }
             catch
             {
                 return View();
+            }
+        }
+
+        public ActionResult EdicionDpi()
+        {
+            return View(new ModeloPaciente());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EdicionDpi(IFormCollection collection)
+        {
+            int parametro = (int.Parse(collection["DPI"]));
+            DateTime FechaModificar = (DateTime.Parse(collection["PróximaConsulta"]));
+           
+            ModeloPaciente PacienteBuscar = new ModeloPaciente();
+            PacienteBuscar.DPI = parametro;
+            ModeloPaciente PacienteModificar = null;
+
+
+            if (Data.Instance.ÁrbolPacientes.Buscar(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro)) != default)
+            {
+                PacienteModificar = Data.Instance.ÁrbolPacientes.Buscar(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro));
+                PacienteModificar.PróximaConsulta = FechaModificar;
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return RedirectToAction(nameof(ErrorBusqueda));
+
+            }
+        }
+
+        public ActionResult EdicionNombres()
+        {
+            return View(new ModeloPaciente());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EdicionNombres(IFormCollection collection)
+        {
+            string parametro = (collection["Nombres"]);
+            string parametro2 = (collection["Apellidos"]);
+            DateTime FechaModificar = (DateTime.Parse(collection["PróximaConsulta"]));
+
+            ModeloPaciente PacienteBuscar = new ModeloPaciente();
+            PacienteBuscar.Nombres = parametro;
+            PacienteBuscar.Apellidos = parametro2;
+            ModeloPaciente PacienteModificar = null;
+
+            if (Data.Instance.ÁrbolPacientes.BuscarNombre(Lab03_ED_2022.Delegados.Delegado.CompararNombres(parametro, parametro2)) != default)
+            {
+                PacienteModificar = Data.Instance.ÁrbolPacientes.BuscarNombre(Lab03_ED_2022.Delegados.Delegado.CompararNombres(parametro, parametro2));
+                PacienteModificar.PróximaConsulta = FechaModificar;
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return RedirectToAction(nameof(ErrorBusqueda));
+
             }
         }
     }
