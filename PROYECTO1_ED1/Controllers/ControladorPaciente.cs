@@ -23,7 +23,10 @@ namespace PROYECTO1_ED1.Controllers
             return View();
         }
 
-
+        public ActionResult ErrorBusqueda(int id)
+        {
+            return View();
+        }
 
         // GET: ControladorPaciente/Details/5
         public ActionResult Details(int id)
@@ -36,7 +39,69 @@ namespace PROYECTO1_ED1.Controllers
         {
             return View();
         }
+        public ActionResult IndiceBusqueda()
+        {
+            //formulario para busquedas
+            return View(new ModeloPaciente());
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult IndiceBusqueda(IFormCollection collection)
+        {
+            try
+            {
+
+
+                return View();
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult BusquedaDpi()
+        {
+            return View(new ModeloPaciente());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult BusquedaDpi(IFormCollection collection)
+        {
+            int parametro = (int.Parse(collection["DPI"]));
+
+            if (Data.Instance.ÁrbolPacientes.Buscar(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro)) != default)
+            {
+                return View(Data.Instance.ÁrbolPacientes.Buscar(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro)));
+            }
+            else
+            {
+                return RedirectToAction(nameof(ErrorBusqueda));
+            }
+        }
+        public ActionResult BusquedaNombre()
+        {
+            return View(new ModeloPaciente());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult BusquedaNombre(IFormCollection collection)
+        {
+            string parametro = (collection["Nombres"]);
+            string parametro2 = (collection["Apellidos"]);
+
+            if (Data.Instance.ÁrbolPacientes.BuscarNombre(Lab03_ED_2022.Delegados.Delegado.CompararNombres(parametro, parametro2)) != default)
+            {
+                return View(Data.Instance.ÁrbolPacientes.BuscarNombre(Lab03_ED_2022.Delegados.Delegado.CompararNombres(parametro, parametro2)));
+            }
+            else
+            {
+                return RedirectToAction(nameof(ErrorBusqueda));
+            }
+        }
         // POST: ControladorPaciente/Create
         [HttpPost]
         [ValidateAntiForgeryToken]

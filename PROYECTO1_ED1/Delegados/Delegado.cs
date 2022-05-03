@@ -1,16 +1,14 @@
-﻿
-
-using PROYECTO1_ED1.Models;
+﻿using PROYECTO1_ED1.Models;
 using System;
 
-namespace Lab03_ED_2022.Comparison
+namespace Lab03_ED_2022.Delegados
 {
     public delegate int Compare<T>(T a, T b);
     public delegate int VerificarFecha<T>(T a);
+    
 
-    public class Delegados
+    public class Delegado
     {
-
         public static int VerificarFecha(ModeloPaciente a)
         {
             DateTime HoraActual = DateTime.Now;
@@ -73,6 +71,16 @@ namespace Lab03_ED_2022.Comparison
                 return 0;
             }
         }
+        public static int CompararNombres(ModeloPaciente a, ModeloPaciente b)
+        {
+
+            if (a.Nombres == b.Nombres && a.Apellidos == b.Apellidos)
+            {
+                return 1;
+            }
+            return -1;
+
+        }
 
         public static ModeloPaciente CompararDPI(int a)
         {
@@ -81,10 +89,13 @@ namespace Lab03_ED_2022.Comparison
             return parametro;
         }
 
-
-
+        public static ModeloPaciente CompararNombres(string a, string b)
+        {
+            ModeloPaciente parametro = new ModeloPaciente();
+            parametro.Nombres = a;
+            parametro.Apellidos = b;
+            return parametro;
+        }
     }
-
-
 }
 
