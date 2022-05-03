@@ -22,9 +22,13 @@
                 <input asp-for="Apellidos" class="form-control" />
                 <span asp-validation-for="Apellidos" class="text-danger"></span>
             </div>
-
             <div class="form-group">
-                <input type="submit" value="Buscar Nombres" class="btn btn-primary" />
+                <label asp-for="PróximaConsulta" class="control-label"></label>
+                <input asp-for="PróximaConsulta" class="form-control" />
+                <span asp-validation-for="PróximaConsulta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Editar fecha" class="btn btn-primary" />
             </div>
         </form>
     </div>
