@@ -1,0 +1,57 @@
+﻿@model PROYECTO1_ED1.Models.ModeloPaciente
+
+@{
+    ViewData["Title"] = "BusquedaNombre";
+}
+
+<h1>Paciente: </h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="BusquedaNombre">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nombres" class="control-label"></label>
+                <input asp-for="Nombres" class="form-control" />
+                <span asp-validation-for="Nombres" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DPI" class="control-label"></label>
+                <input asp-for="DPI" class="form-control" />
+                <span asp-validation-for="DPI" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Edad" class="control-label"></label>
+                <input asp-for="Edad" class="form-control" />
+                <span asp-validation-for="Edad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Teléfono" class="control-label"></label>
+                <input asp-for="Teléfono" class="form-control" />
+                <span asp-validation-for="Teléfono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ÚltimaConsulta" class="control-label"></label>
+                <input asp-for="ÚltimaConsulta" class="form-control" />
+                <span asp-validation-for="ÚltimaConsulta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PróximaConsulta" class="control-label"></label>
+                <input asp-for="PróximaConsulta" class="form-control" />
+                <span asp-validation-for="PróximaConsulta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescripciónTratamiento" class="control-label"></label>
+                <input asp-for="DescripciónTratamiento" class="form-control" />
+                <span asp-validation-for="DescripciónTratamiento" class="text-danger"></span>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

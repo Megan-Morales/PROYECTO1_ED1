@@ -8,6 +8,7 @@ namespace Lab03_ED_2022.Estructuras_de_datos
     public class Árbol<T> : IEnumerable<T>, IEnumerable  // interfaz
     {
         public Compare<T> Comparar { get; set; }
+        public Compare<T> CompararNombres { get; set; }
 
         public VerificarFecha<T> CompararFecha { get; set; }
         public VerificarFecha<T> VerFecha { get; set; }
@@ -136,7 +137,6 @@ namespace Lab03_ED_2022.Estructuras_de_datos
                 actualroot = newNode;
                 return actualroot;
             }
-
         }
 
         public bool ReturnFalse()
@@ -214,12 +214,10 @@ namespace Lab03_ED_2022.Estructuras_de_datos
             }
             else if (Comparar(elemento, aux_Node.value) == 0)
             {
-
                 return aux_Node.value;
             }
             else if (Comparar(elemento, aux_Node.value) < 0)
             {
-
                 return Buscar(elemento, aux_Node.left);
             }
             else
@@ -228,30 +226,39 @@ namespace Lab03_ED_2022.Estructuras_de_datos
             }
         }
 
-        //public T BuscarNombre(T elemento)
-        //{
-        //    return BuscarNombre(elemento, this.root);
-        //}
+        public T BuscarNombre(T elemento)
+        {
+            return BuscarNombre(elemento, this.root);
+        }
 
-        //private T BuscarNombre(T elemento, Nodo<T> padre)
-        //{
-        //    Nodo<T> auxiliar = padre;
-        //    if (padre != null)
-        //    {
-        //        if (Comparar)
-        //        {
-
-        //        }
-        //        queue.Encolar(padre.value);
-        //        InOrder(padre.right, ref queue);
-        //    }
-        //    return default(T);
-        //}
-
+        private T BuscarNombre(T elemento, Nodo<T> padre)
+        {
+            Nodo<T> auxiliar = padre;
+            if (padre != null)
+            {
+                T hijoIzq = BuscarNombre(elemento, auxiliar.left);
+                
+                if (hijoIzq != null)
+                {
+                    return hijoIzq;
+                }
+                
+                if (CompararNombres(elemento, auxiliar.value)==1)
+                {
+                    return auxiliar.value;
+                }
+                T hijoDer = BuscarNombre(elemento, auxiliar.right);
+                
+                if (hijoDer != null)
+                {
+                    return hijoDer;
+                }
+            }
+            return default(T);
+        }
 
         private void InOrder(Nodo<T> padre, ref ColaRecorrido<T> queue)
         {
-
             if (padre != null)
             {
                 InOrder(padre.left, ref queue);
@@ -265,19 +272,16 @@ namespace Lab03_ED_2022.Estructuras_de_datos
         {
             var queue = new ColaRecorrido<T>();
             InOrder(root, ref queue);
-
             while (!queue.ColaVacia())
             {
                 yield return queue.DesEncolar();
             }
-
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
-
     }
 }
 //fin 

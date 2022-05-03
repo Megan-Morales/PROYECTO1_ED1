@@ -28,8 +28,9 @@ namespace PROYECTO1_ED1.Helpers
         {
             Comparar = Delegado.CompararDPI,
             CompararFecha = Delegado.VerificarFecha,
-           
-           
+            CompararNombres = Delegado.CompararNombres
+
+
         };
 
         //arbol para guardar las fechas de consulta 

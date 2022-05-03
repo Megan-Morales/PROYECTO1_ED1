@@ -5,6 +5,7 @@ namespace Lab03_ED_2022.Delegados
 {
     public delegate int Compare<T>(T a, T b);
     public delegate int VerificarFecha<T>(T a);
+    
 
     public class Delegado
     {
@@ -70,24 +71,15 @@ namespace Lab03_ED_2022.Delegados
                 return 0;
             }
         }
-        public static int CompararNombre(ModeloPaciente a, ModeloPaciente b)
+        public static int CompararNombres(ModeloPaciente a, ModeloPaciente b)
         {
 
-            if (a.Nombres != b.Nombres)
+            if (a.Nombres == b.Nombres && a.Apellidos == b.Apellidos)
             {
-                if (a.Nombres.CompareTo(b.Nombres) < 0)
-                {
-                    return -1;
-                }
-                else
-                {
-                    return 1;
-                }
+                return 1;
             }
-            else
-            {
-                return 0;
-            }
+            return -1;
+
         }
 
         public static ModeloPaciente CompararDPI(int a)
@@ -97,10 +89,13 @@ namespace Lab03_ED_2022.Delegados
             return parametro;
         }
 
-
-
+        public static ModeloPaciente CompararNombres(string a, string b)
+        {
+            ModeloPaciente parametro = new ModeloPaciente();
+            parametro.Nombres = a;
+            parametro.Apellidos = b;
+            return parametro;
+        }
     }
-
-
 }
 
