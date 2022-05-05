@@ -186,11 +186,17 @@ namespace PROYECTO1_ED1.Controllers
             PacienteBuscar.DPI = parametro;
             ModeloPaciente PacienteModificar = null;
 
+            ModeloPaciente PacienteBuscar2arbol = new ModeloPaciente();
+            PacienteBuscar2arbol.DPI = parametro;
+            ModeloPaciente PacienteModificar2arbol = null;
 
-            if (Data.Instance.ÁrbolPacientes.Buscar(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro)) != default)
+
+            if (Data.Instance.ÁrbolPacientes.Buscar(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro)) != default && Data.Instance.FechasdeConsulta.BuscarDpi(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro)) != default)
             {
                 PacienteModificar = Data.Instance.ÁrbolPacientes.Buscar(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro));
+                PacienteModificar2arbol = Data.Instance.FechasdeConsulta.BuscarDpi(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro));
                 PacienteModificar.PróximaConsulta = FechaModificar;
+                PacienteModificar2arbol.PróximaConsulta = FechaModificar;
                 return RedirectToAction(nameof(Index));
             }
             else
@@ -218,10 +224,17 @@ namespace PROYECTO1_ED1.Controllers
             PacienteBuscar.Apellidos = parametro2;
             ModeloPaciente PacienteModificar = null;
 
-            if (Data.Instance.ÁrbolPacientes.BuscarNombre(Lab03_ED_2022.Delegados.Delegado.CompararNombres(parametro, parametro2)) != default)
+            ModeloPaciente PacienteBuscar2 = new ModeloPaciente();
+            PacienteBuscar2.Nombres = parametro;
+            PacienteBuscar2.Apellidos = parametro2;
+            ModeloPaciente PacienteModificar2 = null;
+
+            if (Data.Instance.ÁrbolPacientes.BuscarNombre(Lab03_ED_2022.Delegados.Delegado.CompararNombres(parametro, parametro2)) != default && Data.Instance.FechasdeConsulta.BuscarNombre(Lab03_ED_2022.Delegados.Delegado.CompararNombres(parametro, parametro2)) != default)
             {
                 PacienteModificar = Data.Instance.ÁrbolPacientes.BuscarNombre(Lab03_ED_2022.Delegados.Delegado.CompararNombres(parametro, parametro2));
+                PacienteModificar2 = Data.Instance.FechasdeConsulta.BuscarNombre(Lab03_ED_2022.Delegados.Delegado.CompararNombres(parametro, parametro2));
                 PacienteModificar.PróximaConsulta = FechaModificar;
+                PacienteModificar2.PróximaConsulta = FechaModificar;
                 return RedirectToAction(nameof(Index));
             }
             else

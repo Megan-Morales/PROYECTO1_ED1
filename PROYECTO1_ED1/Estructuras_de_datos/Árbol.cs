@@ -9,6 +9,7 @@ namespace Lab03_ED_2022.Estructuras_de_datos
     {
         public Compare<T> Comparar { get; set; }
         public Compare<T> CompararNombres { get; set; }
+        public Compare<T> CompararId { get; set; }
 
         public VerificarFecha<T> CompararFecha { get; set; }
         public VerificarFecha<T> VerFecha { get; set; }
@@ -243,12 +244,42 @@ namespace Lab03_ED_2022.Estructuras_de_datos
                     return hijoIzq;
                 }
                 
-                if (CompararNombres(elemento, auxiliar.value)==1)
+                if (CompararNombres(elemento, auxiliar.value)==0)
                 {
                     return auxiliar.value;
                 }
                 T hijoDer = BuscarNombre(elemento, auxiliar.right);
                 
+                if (hijoDer != null)
+                {
+                    return hijoDer;
+                }
+            }
+            return default(T);
+        }
+        public T BuscarDpi(T elemento)
+        {
+            return BuscarDpi(elemento, this.root);
+        }
+
+        private T BuscarDpi(T elemento, Nodo<T> padre)
+        {
+            Nodo<T> auxiliar = padre;
+            if (padre != null)
+            {
+                T hijoIzq = BuscarDpi(elemento, auxiliar.left);
+
+                if (hijoIzq != null)
+                {
+                    return hijoIzq;
+                }
+
+                if (CompararId(elemento, auxiliar.value) == 0)
+                {
+                    return auxiliar.value;
+                }
+                T hijoDer = BuscarDpi(elemento, auxiliar.right);
+
                 if (hijoDer != null)
                 {
                     return hijoDer;

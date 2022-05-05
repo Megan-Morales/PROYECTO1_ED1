@@ -76,9 +76,9 @@ namespace Lab03_ED_2022.Delegados
 
             if (a.Nombres == b.Nombres && a.Apellidos == b.Apellidos)
             {
-                return 1;
+                return 0;
             }
-            return -1;
+            return 1;
 
         }
 
