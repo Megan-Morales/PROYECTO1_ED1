@@ -12,7 +12,8 @@ namespace Lab03_ED_2022.Delegados
         public static int VerificarFecha(ModeloPaciente a)
         {
             DateTime HoraActual = DateTime.Now;
-
+            
+          
             if (DateTime.Compare(a.PróximaConsulta,HoraActual) < 0) 
             {
                 return 1; 
@@ -76,9 +77,9 @@ namespace Lab03_ED_2022.Delegados
 
             if (a.Nombres == b.Nombres && a.Apellidos == b.Apellidos)
             {
-                return 1;
+                return 0;
             }
-            return -1;
+            return 1;
 
         }
 
@@ -86,6 +87,12 @@ namespace Lab03_ED_2022.Delegados
         {
             ModeloPaciente parametro = new ModeloPaciente();
             parametro.DPI = a;
+            return parametro;
+        }
+        public static ModeloPaciente CompararFecha(DateTime a)
+        {
+            ModeloPaciente parametro = new ModeloPaciente();
+            parametro.PróximaConsulta = a;
             return parametro;
         }
 

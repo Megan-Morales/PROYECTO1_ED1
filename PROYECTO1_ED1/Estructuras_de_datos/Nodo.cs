@@ -8,7 +8,7 @@ namespace Lab03_ED_2022.Estructuras_de_datos
     public class Nodo<T>
     {
         public T value;
-        public int totalConsultas = 1;
+        public int totalConsultas = 1; //preguntar
         public Nodo<T> left;
         public Nodo<T> right;
         public int height;

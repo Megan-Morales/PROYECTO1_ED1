@@ -1,4 +1,5 @@
 ﻿using Lab03_ED_2022.Delegados;
+using Lab03_ED_2022.Estructura_de_Datos;
 using Lab03_ED_2022.Estructuras_de_datos;
 using PROYECTO1_ED1.Models;
 using System;
@@ -27,8 +28,10 @@ namespace PROYECTO1_ED1.Helpers
         public Árbol<ModeloPaciente> ÁrbolPacientes = new Árbol<ModeloPaciente>
         {
             Comparar = Delegado.CompararDPI,
+            CompararId = Delegado.CompararDPI,
             CompararFecha = Delegado.VerificarFecha,
-            CompararNombres = Delegado.CompararNombres
+            CompararNombres = Delegado.CompararNombres,
+            CompararFechaBuscar = Delegado.CompararFecha
 
 
         };
@@ -37,7 +40,16 @@ namespace PROYECTO1_ED1.Helpers
         public Árbol<ModeloPaciente> FechasdeConsulta = new Árbol<ModeloPaciente>
         {
             Comparar = Delegado.CompararFecha,
+            CompararId = Delegado.CompararDPI,
             CompararFecha = Delegado.VerificarFecha,
+            CompararNombres = Delegado.CompararNombres,
+            CompararFechaBuscar = Delegado.CompararFecha
+
         };
+
+        public ColaRecorrido<ModeloPaciente> PacientesOrtodoncia = new ColaRecorrido<ModeloPaciente> { };
+        public ColaRecorrido<ModeloPaciente> PacientesCaries = new ColaRecorrido<ModeloPaciente> { };
+        public ColaRecorrido<ModeloPaciente> PacientesNoDiagnostico= new ColaRecorrido<ModeloPaciente> { };
+        public ColaRecorrido<ModeloPaciente> PacientesDiagnostico = new ColaRecorrido<ModeloPaciente> { };
     }
 }

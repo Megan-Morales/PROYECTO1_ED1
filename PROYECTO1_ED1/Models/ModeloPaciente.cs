@@ -11,20 +11,30 @@ namespace PROYECTO1_ED1.Models
     
     public class ModeloPaciente
     {
+        
         [Required]
         public string Nombres { get; set; }
+
         [Required]
         public string Apellidos { get; set; }
+
         [Required]
         public long DPI { get; set; }
+
         [Required]
         public int Edad { get; set; }
+
         [Required]
         public long Teléfono { get; set; }
+
         [Required]
         public DateTime ÚltimaConsulta { get; set; }
-        public DateTime PróximaConsulta { get; set; }
+
         public string DescripciónTratamiento { get; set; }
+        [Required]
+        public string Tratamiento { get; set; }
+       
+        public DateTime PróximaConsulta { get; set; }
 
         public static bool Guardar(ModeloPaciente datos)
         {
@@ -38,6 +48,23 @@ namespace PROYECTO1_ED1.Models
 
             return false; 
             
+        }
+
+        public static void GuardadColaO (ModeloPaciente datos)
+        {
+            Data.Instance.PacientesOrtodoncia.Encolar(datos);   
+        }
+        public static void GuardadColaC(ModeloPaciente datos)
+        {
+            Data.Instance.PacientesCaries.Encolar(datos);
+        }
+        public static void GuardadColaS(ModeloPaciente datos)
+        {
+            Data.Instance.PacientesNoDiagnostico.Encolar(datos);
+        }
+        public static void GuardadColaX(ModeloPaciente datos)
+        {
+            Data.Instance.PacientesDiagnostico.Encolar(datos);
         }
     }
 }
