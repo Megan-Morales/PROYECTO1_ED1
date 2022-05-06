@@ -30,7 +30,8 @@ namespace PROYECTO1_ED1.Helpers
             Comparar = Delegado.CompararDPI,
             CompararId = Delegado.CompararDPI,
             CompararFecha = Delegado.VerificarFecha,
-            CompararNombres = Delegado.CompararNombres
+            CompararNombres = Delegado.CompararNombres,
+            CompararFechaBuscar = Delegado.CompararFecha
 
 
         };
@@ -41,7 +42,9 @@ namespace PROYECTO1_ED1.Helpers
             Comparar = Delegado.CompararFecha,
             CompararId = Delegado.CompararDPI,
             CompararFecha = Delegado.VerificarFecha,
-            CompararNombres = Delegado.CompararNombres
+            CompararNombres = Delegado.CompararNombres,
+            CompararFechaBuscar = Delegado.CompararFecha
+
         };
 
         public ColaRecorrido<ModeloPaciente> PacientesOrtodoncia = new ColaRecorrido<ModeloPaciente> { };

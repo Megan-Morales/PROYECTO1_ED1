@@ -16,7 +16,22 @@ namespace PROYECTO1_ED1.Controllers
         {
             return View(Data.Instance.ÁrbolPacientes);
         }
-
+        public ActionResult IndexCaries()
+        {
+            return View(Data.Instance.ÁrbolPacientes);
+        }
+        public ActionResult IndexOrtodoncia()
+        {
+            return View(Data.Instance.ÁrbolPacientes);
+        }
+        public ActionResult IndexSinDiagnostico()
+        {
+            return View(Data.Instance.ÁrbolPacientes);
+        }
+        public ActionResult IndexOtro()
+        {
+            return View(Data.Instance.ÁrbolPacientes);
+        }
         //vista para mostrar error con las fechas
         public ActionResult Error()
         {
@@ -113,7 +128,7 @@ namespace PROYECTO1_ED1.Controllers
                 Edad = int.Parse(collection["Edad"]),
                 Teléfono = long.Parse(collection["Teléfono"]),
                 ÚltimaConsulta = DateTime.Parse(collection["ÚltimaConsulta"]),
-                PróximaConsulta = DateTime.Parse(collection["PróximaConsulta"]),
+                PróximaConsulta = DateTime.Parse(collection["PróximaConsulta"]).Date,
                 DescripciónTratamiento = collection["DescripciónTratamiento"],
                 Tratamiento = collection["Tratamiento"],
             }) == true)
@@ -124,7 +139,7 @@ namespace PROYECTO1_ED1.Controllers
                 PacienteInsertado.Edad = int.Parse(collection["Edad"]);
                 PacienteInsertado.Teléfono = long.Parse(collection["Teléfono"]);
                 PacienteInsertado.ÚltimaConsulta = DateTime.Parse(collection["ÚltimaConsulta"]);
-                PacienteInsertado.PróximaConsulta = DateTime.Parse(collection["PróximaConsulta"]);
+                PacienteInsertado.PróximaConsulta = DateTime.Parse(collection["PróximaConsulta"]).Date;
                 PacienteInsertado.DescripciónTratamiento = collection["DescripciónTratamiento"];
                 PacienteInsertado.Tratamiento = collection["Tratamiento"];
                
@@ -207,13 +222,13 @@ namespace PROYECTO1_ED1.Controllers
         public ActionResult EdicionDpi(IFormCollection collection)
         {
             int parametro = (int.Parse(collection["DPI"]));
-            DateTime FechaModificar = (DateTime.Parse(collection["PróximaConsulta"]));
+            DateTime FechaModificar = (DateTime.Parse(collection["PróximaConsulta"])).Date;
             
             ModeloPaciente PacienteBuscar = new ModeloPaciente();
             PacienteBuscar.DPI = parametro;
             ModeloPaciente PacienteModificar = null;
 
-            DateTime FechaAnterior = PacienteBuscar.PróximaConsulta;
+            
 
             ModeloPaciente PacienteBuscar2arbol = new ModeloPaciente();
             PacienteBuscar2arbol.DPI = parametro;
@@ -224,19 +239,40 @@ namespace PROYECTO1_ED1.Controllers
             {
                 PacienteModificar = Data.Instance.ÁrbolPacientes.Buscar(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro));
                 PacienteModificar2arbol = Data.Instance.FechasdeConsulta.BuscarDpi(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro));
-                PacienteModificar.PróximaConsulta = FechaModificar;
-                PacienteModificar2arbol.PróximaConsulta = FechaModificar;
-                //if (Data.Instance.ÁrbolPacientes.VerificarProxFecha(PacienteModificar) == true)
-                //{
-                //    Data.Instance.FechasdeConsulta.RestarTotalConsultas(PacienteModificar);
+                
+                if(DateTime.Compare(DateTime.Now, FechaModificar) <= 0) //si la fecha ingresada es menor
+                {
+                    Lab03_ED_2022.Estructuras_de_datos.Nodo<ModeloPaciente> fechaBuscada = Data.Instance.FechasdeConsulta.BuscarFecha(Lab03_ED_2022.Delegados.Delegado.CompararFecha(FechaModificar));
+                    Lab03_ED_2022.Estructuras_de_datos.Nodo<ModeloPaciente> fechaBuscadaAnterior = Data.Instance.FechasdeConsulta.BuscarFecha(Lab03_ED_2022.Delegados.Delegado.CompararFecha(PacienteModificar.PróximaConsulta));
+                    if (fechaBuscada == null)
+                    {
+                        PacienteModificar.PróximaConsulta = FechaModificar;
+                        PacienteModificar2arbol.PróximaConsulta = FechaModificar;
+
+                        ModeloPaciente.Guardar(PacienteModificar);
+
+                        fechaBuscadaAnterior.totalConsultas--;
+                        
+                    }
+                    else if(fechaBuscada.totalConsultas <= 1)
+                    {
+                        PacienteModificar.PróximaConsulta = FechaModificar;
+                        PacienteModificar2arbol.PróximaConsulta = FechaModificar;
+                        fechaBuscada.totalConsultas++;
+                        fechaBuscadaAnterior.totalConsultas--;
+                    }
+                    else
+                    {
+                        return RedirectToAction(nameof(Error));
+                    }
+                }
+                else
+                {
+                    return RedirectToAction(nameof(Error));
+                }
+                
+                
                 return RedirectToAction(nameof(Index));
-                //}
-                //else
-                //{
-                //    PacienteBuscar.DPI = parametro;
-                //    PacienteBuscar2arbol.DPI = parametro;
-                //    return RedirectToAction(nameof(Error));
-                //}
             }
             else
             {

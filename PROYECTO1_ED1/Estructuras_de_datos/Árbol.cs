@@ -11,6 +11,7 @@ namespace Lab03_ED_2022.Estructuras_de_datos
         public Compare<T> CompararNombres { get; set; }
         public Compare<T> CompararId { get; set; }
 
+        public Compare<T> CompararFechaBuscar { get; set; }
         public VerificarFecha<T> CompararFecha { get; set; }
         public VerificarFecha<T> VerFecha { get; set; }
 
@@ -143,19 +144,6 @@ namespace Lab03_ED_2022.Estructuras_de_datos
         public bool ReturnFalse()
         {
             return false;
-        }
-
-        public int RestarTotalConsultas(T node)
-        {
-            Nodo<T> newNode = new Nodo<T>(node);
-            BuscarDpi(newNode.value);
-            return newNode.totalConsultas--;
-        }
-        public int GetTotalConsultas(T node)
-        {
-            Nodo<T> newNode = new Nodo<T>(node);
-            BuscarDpi(newNode.value);
-            return newNode.totalConsultas;
         }
 
         //Para retornar la altura de los nodos
@@ -301,6 +289,47 @@ namespace Lab03_ED_2022.Estructuras_de_datos
             return default(T);
         }
 
+        public Nodo<T> BuscarFecha(T valor)
+        {
+            return BuscarFecha(valor, root);
+        }
+        private Nodo<T> BuscarFecha(T elemento, Nodo<T> padre)
+        {
+            Nodo<T> auxiliar = padre;
+            if (padre != null)
+            {
+                Nodo<T> hijoIzq = BuscarFecha(elemento, auxiliar.left);
+
+                if (hijoIzq != null)
+                {
+                    return hijoIzq;
+                }
+
+                if (CompararFechaBuscar(elemento, auxiliar.value) == 0)
+                {
+                    return auxiliar;
+                }
+                Nodo<T> hijoDer = BuscarFecha(elemento, auxiliar.right);
+
+                if (hijoDer != null)
+                {
+                    return hijoDer;
+                }
+            }
+            return default(Nodo<T> );
+        }
+        public int RestarTotalConsultas(T node)
+        {
+            Nodo<T> newNode = new Nodo<T>(node);
+            BuscarDpi(newNode.value);
+            return newNode.totalConsultas--;
+        }
+        public int GetTotalConsultas(T node)
+        {
+            Nodo<T> newNode = new Nodo<T>(node);
+            BuscarDpi(newNode.value);
+            return newNode.totalConsultas;
+        }
         private void InOrder(Nodo<T> padre, ref ColaRecorrido<T> queue)
         {
             if (padre != null)
