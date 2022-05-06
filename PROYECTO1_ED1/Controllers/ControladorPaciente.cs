@@ -222,6 +222,7 @@ namespace PROYECTO1_ED1.Controllers
         public ActionResult EdicionDpi(IFormCollection collection)
         {
             int parametro = (int.Parse(collection["DPI"]));
+
             DateTime FechaModificar = (DateTime.Parse(collection["PróximaConsulta"])).Date;
             
             ModeloPaciente PacienteBuscar = new ModeloPaciente();
@@ -232,20 +233,18 @@ namespace PROYECTO1_ED1.Controllers
             PacienteBuscar2arbol.DPI = parametro;
             ModeloPaciente PacienteModificar2arbol = null;
 
-
-            if (Data.Instance.ÁrbolPacientes.Buscar(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro)) != default && Data.Instance.FechasdeConsulta.BuscarDpi(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro)) != default)
+            //ENCUENTRA EL PACIENTE //si la fecha ingresada es menor o igual
+            if (Data.Instance.ÁrbolPacientes.Buscar(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro)) != default && DateTime.Compare(DateTime.Now, FechaModificar) <= 0)
             {
                 PacienteModificar = Data.Instance.ÁrbolPacientes.Buscar(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro));
-                PacienteModificar2arbol = Data.Instance.FechasdeConsulta.BuscarDpi(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro));
-                
-                if(DateTime.Compare(DateTime.Now, FechaModificar) <= 0) //si la fecha ingresada es menor o igual
-                {
+               
+                 
+         
                     Lab03_ED_2022.Estructuras_de_datos.Nodo<ModeloPaciente> fechaBuscada = Data.Instance.FechasdeConsulta.BuscarFecha(Lab03_ED_2022.Delegados.Delegado.CompararFecha(FechaModificar));
                     Lab03_ED_2022.Estructuras_de_datos.Nodo<ModeloPaciente> fechaBuscadaAnterior = Data.Instance.FechasdeConsulta.BuscarFecha(Lab03_ED_2022.Delegados.Delegado.CompararFecha(PacienteModificar.PróximaConsulta));
                     if (fechaBuscada == null)
                     {
                         PacienteModificar.PróximaConsulta = FechaModificar; //se modifica en ambos arboles
-                        PacienteModificar2arbol.PróximaConsulta = FechaModificar;
 
                         ModeloPaciente.Guardar(PacienteModificar); 
 
@@ -255,7 +254,7 @@ namespace PROYECTO1_ED1.Controllers
                     else if(fechaBuscada.totalConsultas < 8)
                     {
                         PacienteModificar.PróximaConsulta = FechaModificar;
-                        PacienteModificar2arbol.PróximaConsulta = FechaModificar;
+                        
                         fechaBuscada.totalConsultas++;
                         fechaBuscadaAnterior.totalConsultas--;
                     }
@@ -263,20 +262,16 @@ namespace PROYECTO1_ED1.Controllers
                     {
                         return RedirectToAction(nameof(Error));
                     }
-                }
-                else
-                {
-                    return RedirectToAction(nameof(Error));
-                }
                 
-                
-                return RedirectToAction(nameof(Index));
+               
             }
             else
             {
-                return RedirectToAction(nameof(ErrorBusqueda));
-
+                return RedirectToAction(nameof(Error));
             }
+
+
+            return RedirectToAction(nameof(Index));
         }
 
         public ActionResult EdicionNombres()

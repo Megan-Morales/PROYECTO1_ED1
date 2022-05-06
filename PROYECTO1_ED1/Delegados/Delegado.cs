@@ -9,6 +9,7 @@ namespace Lab03_ED_2022.Delegados
 
     public class Delegado
     {
+       
         public static int VerificarFecha(ModeloPaciente a)
         {
             DateTime HoraActual = DateTime.Now;
