@@ -254,7 +254,7 @@ namespace PROYECTO1_ED1.Controllers
                         fechaBuscadaAnterior.totalConsultas--;
                         
                     }
-                    else if(fechaBuscada.totalConsultas <= 1)
+                    else if(fechaBuscada.totalConsultas < 8)
                     {
                         PacienteModificar.PróximaConsulta = FechaModificar;
                         PacienteModificar2arbol.PróximaConsulta = FechaModificar;

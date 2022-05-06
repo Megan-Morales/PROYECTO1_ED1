@@ -318,18 +318,7 @@ namespace Lab03_ED_2022.Estructuras_de_datos
             }
             return default(Nodo<T> );
         }
-        public int RestarTotalConsultas(T node)
-        {
-            Nodo<T> newNode = new Nodo<T>(node);
-            BuscarDpi(newNode.value);
-            return newNode.totalConsultas--;
-        }
-        public int GetTotalConsultas(T node)
-        {
-            Nodo<T> newNode = new Nodo<T>(node);
-            BuscarDpi(newNode.value);
-            return newNode.totalConsultas;
-        }
+       
         private void InOrder(Nodo<T> padre, ref ColaRecorrido<T> queue)
         {
             if (padre != null)
