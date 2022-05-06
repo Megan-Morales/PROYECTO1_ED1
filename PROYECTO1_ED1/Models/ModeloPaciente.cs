@@ -25,11 +25,12 @@ namespace PROYECTO1_ED1.Models
         public DateTime ÚltimaConsulta { get; set; }
         public DateTime PróximaConsulta { get; set; }
         public string DescripciónTratamiento { get; set; }
+        public int Tratamiento { get; set; }
+
 
         public static bool Guardar(ModeloPaciente datos)
         {
             
-
             if (Data.Instance.ÁrbolPacientes.VerificarProxFecha(datos) == true && Data.Instance.FechasdeConsulta.Insert(datos) == true)
             {
                 Data.Instance.ÁrbolPacientes.Insert(datos);  
