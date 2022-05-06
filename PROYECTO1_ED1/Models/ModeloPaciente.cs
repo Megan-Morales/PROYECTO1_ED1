@@ -25,6 +25,8 @@ namespace PROYECTO1_ED1.Models
         public DateTime ÚltimaConsulta { get; set; }
         public DateTime PróximaConsulta { get; set; }
         public string DescripciónTratamiento { get; set; }
+        [Required]
+        public string Tratamiento { get; set; }
 
         public static bool Guardar(ModeloPaciente datos)
         {
@@ -38,6 +40,23 @@ namespace PROYECTO1_ED1.Models
 
             return false; 
             
+        }
+
+        public static void GuardadColaO (ModeloPaciente datos)
+        {
+            Data.Instance.PacientesOrtodoncia.Encolar(datos);   
+        }
+        public static void GuardadColaC(ModeloPaciente datos)
+        {
+            Data.Instance.PacientesCaries.Encolar(datos);
+        }
+        public static void GuardadColaS(ModeloPaciente datos)
+        {
+            Data.Instance.PacientesNoDiagnostico.Encolar(datos);
+        }
+        public static void GuardadColaX(ModeloPaciente datos)
+        {
+            Data.Instance.PacientesDiagnostico.Encolar(datos);
         }
     }
 }

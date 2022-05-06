@@ -28,12 +28,6 @@ namespace PROYECTO1_ED1.Controllers
             return View();
         }
 
-        // GET: ControladorPaciente/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: ControladorPaciente/Create
         public ActionResult Create()
         {
@@ -107,7 +101,9 @@ namespace PROYECTO1_ED1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
         {
-
+            ModeloPaciente PacienteInsertado = new ModeloPaciente();
+            
+            
 
             if (ModeloPaciente.Guardar(new ModeloPaciente
             {
@@ -119,8 +115,39 @@ namespace PROYECTO1_ED1.Controllers
                 ÚltimaConsulta = DateTime.Parse(collection["ÚltimaConsulta"]),
                 PróximaConsulta = DateTime.Parse(collection["PróximaConsulta"]),
                 DescripciónTratamiento = collection["DescripciónTratamiento"],
+                Tratamiento = collection["Tratamiento"],
             }) == true)
             {
+                PacienteInsertado.Nombres = collection["Nombres"];
+                PacienteInsertado.Apellidos = collection["Apellidos"];
+                PacienteInsertado.DPI = long.Parse(collection["DPI"]);
+                PacienteInsertado.Edad = int.Parse(collection["Edad"]);
+                PacienteInsertado.Teléfono = long.Parse(collection["Teléfono"]);
+                PacienteInsertado.ÚltimaConsulta = DateTime.Parse(collection["ÚltimaConsulta"]);
+                PacienteInsertado.PróximaConsulta = DateTime.Parse(collection["PróximaConsulta"]);
+                PacienteInsertado.DescripciónTratamiento = collection["DescripciónTratamiento"];
+                PacienteInsertado.Tratamiento = collection["Tratamiento"];
+               
+                if (PacienteInsertado.Tratamiento == "Ortodoncia")
+                {
+                    ModeloPaciente.GuardadColaO(PacienteInsertado);
+                    
+                }
+                else if (PacienteInsertado.Tratamiento == "Caries")
+                {
+                    ModeloPaciente.GuardadColaC(PacienteInsertado);
+
+                }
+                else if (PacienteInsertado.Tratamiento == "Sin diagnóstico")
+                {
+                    ModeloPaciente.GuardadColaS(PacienteInsertado);
+
+                }
+                else if (PacienteInsertado.Tratamiento == "Otro")
+                {
+                    ModeloPaciente.GuardadColaX(PacienteInsertado);
+
+                }
                 return RedirectToAction(nameof(Index));
                 
             }
@@ -181,10 +208,12 @@ namespace PROYECTO1_ED1.Controllers
         {
             int parametro = (int.Parse(collection["DPI"]));
             DateTime FechaModificar = (DateTime.Parse(collection["PróximaConsulta"]));
-           
+            
             ModeloPaciente PacienteBuscar = new ModeloPaciente();
             PacienteBuscar.DPI = parametro;
             ModeloPaciente PacienteModificar = null;
+
+            DateTime FechaAnterior = PacienteBuscar.PróximaConsulta;
 
             ModeloPaciente PacienteBuscar2arbol = new ModeloPaciente();
             PacienteBuscar2arbol.DPI = parametro;
@@ -197,7 +226,17 @@ namespace PROYECTO1_ED1.Controllers
                 PacienteModificar2arbol = Data.Instance.FechasdeConsulta.BuscarDpi(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro));
                 PacienteModificar.PróximaConsulta = FechaModificar;
                 PacienteModificar2arbol.PróximaConsulta = FechaModificar;
+                //if (Data.Instance.ÁrbolPacientes.VerificarProxFecha(PacienteModificar) == true)
+                //{
+                //    Data.Instance.FechasdeConsulta.RestarTotalConsultas(PacienteModificar);
                 return RedirectToAction(nameof(Index));
+                //}
+                //else
+                //{
+                //    PacienteBuscar.DPI = parametro;
+                //    PacienteBuscar2arbol.DPI = parametro;
+                //    return RedirectToAction(nameof(Error));
+                //}
             }
             else
             {
@@ -233,6 +272,7 @@ namespace PROYECTO1_ED1.Controllers
             {
                 PacienteModificar = Data.Instance.ÁrbolPacientes.BuscarNombre(Lab03_ED_2022.Delegados.Delegado.CompararNombres(parametro, parametro2));
                 PacienteModificar2 = Data.Instance.FechasdeConsulta.BuscarNombre(Lab03_ED_2022.Delegados.Delegado.CompararNombres(parametro, parametro2));
+
                 PacienteModificar.PróximaConsulta = FechaModificar;
                 PacienteModificar2.PróximaConsulta = FechaModificar;
                 return RedirectToAction(nameof(Index));

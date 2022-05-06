@@ -53,6 +53,16 @@
                 <span asp-validation-for="DescripciónTratamiento" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <p>Tratamiento a realizar: </p>
+                <select asp-for="Tratamiento" title="Elija el tratamiento:">
+                    <option></option>
+                    <option>Ortodoncia</option>
+                    <option>Caries</option>
+                    <option>Otro</option>
+                    <option>Sin diagnóstico</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>

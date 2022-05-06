@@ -1,4 +1,5 @@
 ﻿using Lab03_ED_2022.Delegados;
+using Lab03_ED_2022.Estructura_de_Datos;
 using Lab03_ED_2022.Estructuras_de_datos;
 using PROYECTO1_ED1.Models;
 using System;
@@ -42,5 +43,10 @@ namespace PROYECTO1_ED1.Helpers
             CompararFecha = Delegado.VerificarFecha,
             CompararNombres = Delegado.CompararNombres
         };
+
+        public ColaRecorrido<ModeloPaciente> PacientesOrtodoncia = new ColaRecorrido<ModeloPaciente> { };
+        public ColaRecorrido<ModeloPaciente> PacientesCaries = new ColaRecorrido<ModeloPaciente> { };
+        public ColaRecorrido<ModeloPaciente> PacientesNoDiagnostico= new ColaRecorrido<ModeloPaciente> { };
+        public ColaRecorrido<ModeloPaciente> PacientesDiagnostico = new ColaRecorrido<ModeloPaciente> { };
     }
 }

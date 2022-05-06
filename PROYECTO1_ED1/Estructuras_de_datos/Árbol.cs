@@ -145,6 +145,19 @@ namespace Lab03_ED_2022.Estructuras_de_datos
             return false;
         }
 
+        public int RestarTotalConsultas(T node)
+        {
+            Nodo<T> newNode = new Nodo<T>(node);
+            BuscarDpi(newNode.value);
+            return newNode.totalConsultas--;
+        }
+        public int GetTotalConsultas(T node)
+        {
+            Nodo<T> newNode = new Nodo<T>(node);
+            BuscarDpi(newNode.value);
+            return newNode.totalConsultas;
+        }
+
         //Para retornar la altura de los nodos
         public int Node_Height(Nodo<T> node)
         {
