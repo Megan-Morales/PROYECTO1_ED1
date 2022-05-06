@@ -18,7 +18,7 @@ namespace PROYECTO1_ED1.Controllers
         }
         public ActionResult IndexCaries()
         {
-            return View(Data.Instance.ÁrbolPacientes);
+            return View();
         }
         public ActionResult IndexOrtodoncia()
         {
@@ -228,8 +228,6 @@ namespace PROYECTO1_ED1.Controllers
             PacienteBuscar.DPI = parametro;
             ModeloPaciente PacienteModificar = null;
 
-            
-
             ModeloPaciente PacienteBuscar2arbol = new ModeloPaciente();
             PacienteBuscar2arbol.DPI = parametro;
             ModeloPaciente PacienteModificar2arbol = null;
@@ -240,16 +238,16 @@ namespace PROYECTO1_ED1.Controllers
                 PacienteModificar = Data.Instance.ÁrbolPacientes.Buscar(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro));
                 PacienteModificar2arbol = Data.Instance.FechasdeConsulta.BuscarDpi(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro));
                 
-                if(DateTime.Compare(DateTime.Now, FechaModificar) <= 0) //si la fecha ingresada es menor
+                if(DateTime.Compare(DateTime.Now, FechaModificar) <= 0) //si la fecha ingresada es menor o igual
                 {
                     Lab03_ED_2022.Estructuras_de_datos.Nodo<ModeloPaciente> fechaBuscada = Data.Instance.FechasdeConsulta.BuscarFecha(Lab03_ED_2022.Delegados.Delegado.CompararFecha(FechaModificar));
                     Lab03_ED_2022.Estructuras_de_datos.Nodo<ModeloPaciente> fechaBuscadaAnterior = Data.Instance.FechasdeConsulta.BuscarFecha(Lab03_ED_2022.Delegados.Delegado.CompararFecha(PacienteModificar.PróximaConsulta));
                     if (fechaBuscada == null)
                     {
-                        PacienteModificar.PróximaConsulta = FechaModificar;
+                        PacienteModificar.PróximaConsulta = FechaModificar; //se modifica en ambos arboles
                         PacienteModificar2arbol.PróximaConsulta = FechaModificar;
 
-                        ModeloPaciente.Guardar(PacienteModificar);
+                        ModeloPaciente.Guardar(PacienteModificar); 
 
                         fechaBuscadaAnterior.totalConsultas--;
                         
@@ -309,8 +307,38 @@ namespace PROYECTO1_ED1.Controllers
                 PacienteModificar = Data.Instance.ÁrbolPacientes.BuscarNombre(Lab03_ED_2022.Delegados.Delegado.CompararNombres(parametro, parametro2));
                 PacienteModificar2 = Data.Instance.FechasdeConsulta.BuscarNombre(Lab03_ED_2022.Delegados.Delegado.CompararNombres(parametro, parametro2));
 
-                PacienteModificar.PróximaConsulta = FechaModificar;
-                PacienteModificar2.PróximaConsulta = FechaModificar;
+                if (DateTime.Compare(DateTime.Now, FechaModificar) <= 0) //si la fecha ingresada es menor o igual
+                {
+                    Lab03_ED_2022.Estructuras_de_datos.Nodo<ModeloPaciente> fechaBuscada = Data.Instance.FechasdeConsulta.BuscarFecha(Lab03_ED_2022.Delegados.Delegado.CompararFecha(FechaModificar));
+                    Lab03_ED_2022.Estructuras_de_datos.Nodo<ModeloPaciente> fechaBuscadaAnterior = Data.Instance.FechasdeConsulta.BuscarFecha(Lab03_ED_2022.Delegados.Delegado.CompararFecha(PacienteModificar.PróximaConsulta));
+                    if (fechaBuscada == null)
+                    {
+                        PacienteModificar.PróximaConsulta = FechaModificar; //se modifica en ambos arboles
+                        PacienteModificar2.PróximaConsulta = FechaModificar;
+
+                        ModeloPaciente.Guardar(PacienteModificar);
+
+                        fechaBuscadaAnterior.totalConsultas--;
+
+                    }
+                    else if (fechaBuscada.totalConsultas < 8)
+                    {
+                        PacienteModificar.PróximaConsulta = FechaModificar;
+                        PacienteModificar2.PróximaConsulta = FechaModificar;
+                        fechaBuscada.totalConsultas++;
+                        fechaBuscadaAnterior.totalConsultas--;
+                    }
+                    else
+                    {
+                        return RedirectToAction(nameof(Error));
+                    }
+                }
+                else
+                {
+                    return RedirectToAction(nameof(Error));
+                }
+
+
                 return RedirectToAction(nameof(Index));
             }
             else

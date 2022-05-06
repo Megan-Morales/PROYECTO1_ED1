@@ -33,6 +33,7 @@ namespace PROYECTO1_ED1.Models
         public string DescripciónTratamiento { get; set; }
         [Required]
         public string Tratamiento { get; set; }
+       
         public DateTime PróximaConsulta { get; set; }
 
         public static bool Guardar(ModeloPaciente datos)

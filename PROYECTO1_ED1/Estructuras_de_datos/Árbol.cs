@@ -1,5 +1,6 @@
 ﻿using Lab03_ED_2022.Delegados;
 using Lab03_ED_2022.Estructura_de_Datos;
+using PROYECTO1_ED1.Helpers;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -324,7 +325,9 @@ namespace Lab03_ED_2022.Estructuras_de_datos
             if (padre != null)
             {
                 InOrder(padre.left, ref queue);
+
                 queue.Encolar(padre.value);
+
                 InOrder(padre.right, ref queue);
             }
             return;
@@ -344,6 +347,14 @@ namespace Lab03_ED_2022.Estructuras_de_datos
         {
             return GetEnumerator();
         }
+
+       
+
     }
+
+      
+
+    
+    
 }
 //fin 
