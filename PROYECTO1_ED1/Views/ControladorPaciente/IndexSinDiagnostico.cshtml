@@ -4,11 +4,9 @@
     ViewData["Title"] = "IndexSinDiagnostico";
 }
 
-<h1>IndexSinDiagnostico</h1>
+<h1>Listado de Pacientes sin diagnóstico</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<body>Listado de pacientes que no poseen diagnósitco y no han asistido a clínica en al menos 6 meses</body>
 <table class="table">
     <thead>
         <tr>
@@ -73,9 +71,7 @@
                 @Html.DisplayFor(modelItem => item.PróximaConsulta)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <a class="nav-link text-dark" asp-area="" asp-controller="ControladorPaciente" asp-action="IndiceEdicion">Editar</a>
             </td>
         </tr>
 }
