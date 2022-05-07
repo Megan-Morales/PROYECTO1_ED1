@@ -188,7 +188,7 @@ namespace Lab03_ED_2022.Delegados
 
         }
 
-        public static ModeloPaciente CompararDPI(int a)
+        public static ModeloPaciente CompararDPI(long a)
         {
             ModeloPaciente parametro = new ModeloPaciente();
             parametro.DPI = a;

@@ -84,7 +84,7 @@ namespace PROYECTO1_ED1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult BusquedaDpi(IFormCollection collection)
         {
-            int parametro = (int.Parse(collection["DPI"]));
+            long parametro = (long.Parse(collection["DPI"]));
 
             if (Data.Instance.ÁrbolPacientes.Buscar(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro)) != default)
             {
@@ -241,7 +241,7 @@ namespace PROYECTO1_ED1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EdicionDpi(IFormCollection collection)
         {
-            int parametro = (int.Parse(collection["DPI"]));
+            long parametro = (long.Parse(collection["DPI"]));
 
             DateTime FechaModificar = (DateTime.Parse(collection["PróximaConsulta"])).Date;
 
@@ -348,7 +348,7 @@ namespace PROYECTO1_ED1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EdicionTratamiento(IFormCollection collection)
         {
-            int parametro = (int.Parse(collection["DPI"]));
+            long parametro = (long.Parse(collection["DPI"]));
 
             string TratamientoModificar = collection["Tratamiento"];
             string descripcionTratamientoModificar = collection["DescripciónTratamiento"];
