@@ -34,13 +34,19 @@ namespace PROYECTO1_ED1.Models
         [Required]
         public string Tratamiento { get; set; }
        
-        public DateTime PróximaConsulta { get; set; }
+        public DateTime? PróximaConsulta { get; set; }
 
         public static bool Guardar(ModeloPaciente datos)
         {
-            
+            if ((Data.Instance.ÁrbolPacientes.VerificarFechaAnterior(datos) == true && datos.PróximaConsulta == default))
+            {
+                
+                    Data.Instance.ÁrbolPacientes.Insert(datos);
+                    return true;
+                
+            }
 
-            if (Data.Instance.ÁrbolPacientes.VerificarProxFecha(datos) == true && Data.Instance.FechasdeConsulta.Insert(datos) == true)
+            if (Data.Instance.ÁrbolPacientes.VerificarFechaAnterior(datos) == true && Data.Instance.ÁrbolPacientes.VerificarProxFecha(datos) == true)
             {
                 Data.Instance.ÁrbolPacientes.Insert(datos);  
                 return true;
