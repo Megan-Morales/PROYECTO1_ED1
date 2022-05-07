@@ -4,9 +4,9 @@
     ViewData["Title"] = "IndexOtro";
 }
 
-<h1>IndexOtro</h1>
+<h1>Listado de Pacientes con otro tratamiento</h1>
 
-
+<body>Listado de pacientes con otro tratamiento que no han asisto a clínica en al menos 6 meses</body>
 <table class="table">
     <thead>
         <tr>
@@ -71,9 +71,7 @@
                 @Html.DisplayFor(modelItem => item.PróximaConsulta)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <a class="nav-link text-dark" asp-area="" asp-controller="ControladorPaciente" asp-action="IndiceEdicion">Editar</a>
             </td>
         </tr>
 }
