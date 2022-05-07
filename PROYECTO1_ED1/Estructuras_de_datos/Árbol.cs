@@ -1,5 +1,5 @@
 ﻿using Lab03_ED_2022.Delegados;
-using Lab03_ED_2022.Estructura_de_Datos;
+using Lab03_ED_2022.Estructura_de_datos;
 using PROYECTO1_ED1.Helpers;
 using System.Collections;
 using System.Collections.Generic;

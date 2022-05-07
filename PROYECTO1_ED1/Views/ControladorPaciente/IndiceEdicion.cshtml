@@ -56,6 +56,38 @@
         </form>
     </div>
 </div>
+<h4>Ingrese el DPI para actualizar tratamiento</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EdicionTratamiento">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DPI" class="control-label"></label>
+                <input asp-for="DPI" class="form-control" />
+                <span asp-validation-for="DPI" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescripciónTratamiento" class="control-label"></label>
+                <input asp-for="DescripciónTratamiento" class="form-control" />
+                <span asp-validation-for="DescripciónTratamiento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <p>Tratamiento a realizar: </p>
+                <select asp-for="Tratamiento" title="Elija el tratamiento:">
+                    <option></option>
+                    <option>Ortodoncia</option>
+                    <option>Caries</option>
+                    <option>Otro</option>
+                    <option>Sin diagnóstico</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value=" Editar tratamiento" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

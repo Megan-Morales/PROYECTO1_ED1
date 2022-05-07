@@ -3,10 +3,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PROYECTO1_ED1.Helpers;
 using PROYECTO1_ED1.Models;
+using Lab03_ED_2022.Estructura_de_datos;
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PROYECTO1_ED1.Controllers
 {
@@ -122,7 +121,7 @@ namespace PROYECTO1_ED1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
         {
-            
+
 
             try
             {
@@ -157,7 +156,7 @@ namespace PROYECTO1_ED1.Controllers
                 return RedirectToAction(nameof(Error));
 
             }
-            catch 
+            catch
             {
                 if (ModeloPaciente.Guardar(new ModeloPaciente
                 {
@@ -174,17 +173,17 @@ namespace PROYECTO1_ED1.Controllers
                 {
                     return RedirectToAction(nameof(Index));
                 }
-                
-                
-                    return RedirectToAction(nameof(Error));
-                
+
+
+                return RedirectToAction(nameof(Error));
+
 
             }
-            
 
 
 
-           
+
+
 
 
 
@@ -245,7 +244,7 @@ namespace PROYECTO1_ED1.Controllers
             int parametro = (int.Parse(collection["DPI"]));
 
             DateTime FechaModificar = (DateTime.Parse(collection["PróximaConsulta"])).Date;
-            
+
             ModeloPaciente PacienteModificar = null;
 
 
@@ -254,7 +253,7 @@ namespace PROYECTO1_ED1.Controllers
             {
                 PacienteModificar = Data.Instance.ÁrbolPacientes.Buscar(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro));
 
-               
+
 
                 if (Data.Instance.FechasdeConsulta.Insert(new Citas
                 {
@@ -276,8 +275,8 @@ namespace PROYECTO1_ED1.Controllers
                         Fecha = fechaBorrar,
                     });
                 }
-                    //actualiza el nodo
-                    PacienteModificar.PróximaConsulta = FechaModificar;
+                //actualiza el nodo
+                PacienteModificar.PróximaConsulta = FechaModificar;
             }
             else
             {
@@ -339,6 +338,45 @@ namespace PROYECTO1_ED1.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
+        public ActionResult EdicionTratamiento()
+        {
+            return View(new ModeloPaciente());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EdicionTratamiento(IFormCollection collection)
+        {
+            int parametro = (int.Parse(collection["DPI"]));
+
+            string TratamientoModificar = collection["Tratamiento"];
+            string descripcionTratamientoModificar = collection["DescripciónTratamiento"];
+
+            ModeloPaciente PacienteModificar = null;
+
+
+            //ENCUENTRA EL PACIENTE //si la fecha ingresada es menor o igual
+            if (Data.Instance.ÁrbolPacientes.Buscar(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro)) != default)
+            {
+                PacienteModificar = Data.Instance.ÁrbolPacientes.Buscar(Lab03_ED_2022.Delegados.Delegado.CompararDPI(parametro));
+
+                //actualiza el nodo
+                PacienteModificar.Tratamiento = TratamientoModificar;
+                PacienteModificar.DescripciónTratamiento += '\n' + "| " + descripcionTratamientoModificar;
+            }
+            else
+            {
+                //si no encuentra el error
+                return RedirectToAction(nameof(ErrorBusqueda));
+            }
+
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
+
     }
 
 }

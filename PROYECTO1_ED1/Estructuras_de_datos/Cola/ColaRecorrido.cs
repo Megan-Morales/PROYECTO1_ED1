@@ -1,10 +1,10 @@
-﻿using Lab03_ED_2022.Estructura_de_Datos.Cola;
+﻿using Lab03_ED_2022.Estructura_de_datos.Cola;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Lab03_ED_2022.Estructura_de_Datos
+namespace Lab03_ED_2022.Estructura_de_datos
 {
     public class ColaRecorrido<T>
     {
