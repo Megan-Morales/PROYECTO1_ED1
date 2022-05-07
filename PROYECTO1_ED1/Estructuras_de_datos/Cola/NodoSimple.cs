@@ -1,4 +1,4 @@
-﻿namespace Lab03_ED_2022.Estructura_de_Datos.Cola
+﻿namespace Lab03_ED_2022.Estructura_de_datos.Cola
 {
     public class NodoSimple<T>
     {
