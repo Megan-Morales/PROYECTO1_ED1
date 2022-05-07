@@ -1,0 +1,83 @@
+﻿@model IEnumerable<PROYECTO1_ED1.Models.ModeloPaciente>
+
+@{
+    ViewData["Title"] = "IndexOrtodoncia";
+}
+
+<h1>IndexOrtodoncia</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombres)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellidos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DPI)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Edad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Teléfono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ÚltimaConsulta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescripciónTratamiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tratamiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PróximaConsulta)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellidos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DPI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Edad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Teléfono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ÚltimaConsulta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescripciónTratamiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tratamiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PróximaConsulta)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

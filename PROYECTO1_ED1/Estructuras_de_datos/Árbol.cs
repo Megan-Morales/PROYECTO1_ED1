@@ -9,12 +9,18 @@ namespace Lab03_ED_2022.Estructuras_de_datos
     public class Árbol<T> : IEnumerable<T>, IEnumerable  // interfaz
     {
         public Compare<T> Comparar { get; set; }
+
+        public Compare<T> ModificarFecha { get; set; }
         public Compare<T> CompararNombres { get; set; }
         public Compare<T> CompararId { get; set; }
 
         public Compare<T> CompararFechaBuscar { get; set; }
         public VerificarFecha<T> CompararFecha { get; set; }
         public VerificarFecha<T> VerFecha { get; set; }
+
+        public VerificarFecha<T> CompararListas { get; set; }
+
+        public VerificarFecha<T> CompararFechaAnterior { get; set; }
 
         //Varible
         Nodo<T> root;
@@ -23,6 +29,17 @@ namespace Lab03_ED_2022.Estructuras_de_datos
         public bool VerificarProxFecha(T valor)
         {
             if (CompararFecha(valor) == 1)
+            {
+                return false;
+
+            }
+
+            return true;
+        }
+
+        public bool VerificarFechaAnterior(T valor)
+        {
+            if (CompararFechaAnterior(valor) == 1)
             {
                 return false;
 
@@ -217,7 +234,9 @@ namespace Lab03_ED_2022.Estructuras_de_datos
             }
             else if (Comparar(elemento, aux_Node.value) == 0)
             {
+               
                 return aux_Node.value;
+
             }
             else if (Comparar(elemento, aux_Node.value) < 0)
             {
@@ -226,6 +245,37 @@ namespace Lab03_ED_2022.Estructuras_de_datos
             else
             {
                 return Buscar(elemento, aux_Node.right);
+            }
+        }
+
+        public void ModificarFechas(T elemento)
+        {
+            ModificarFechas(elemento, this.root);
+            return;
+        }
+
+
+        private T ModificarFechas(T elemento, Nodo<T> raiz)
+        {
+            Nodo<T> aux_Node = raiz;
+
+            if (aux_Node == null)
+            {
+                return default(T);
+            }
+            else if (Comparar(elemento, aux_Node.value) == 0)
+            {
+                ModificarFecha(elemento, aux_Node.value);
+                return aux_Node.value;
+
+            }
+            else if (Comparar(elemento, aux_Node.value) < 0)
+            {
+                return ModificarFechas(elemento, aux_Node.left);
+            }
+            else
+            {
+                return ModificarFechas(elemento, aux_Node.right);
             }
         }
 
@@ -318,7 +368,12 @@ namespace Lab03_ED_2022.Estructuras_de_datos
                     return hijoDer;
                 }
             }
-            return default(Nodo<T> );
+            return default(Nodo<T>);
+        }
+
+        public void RestarFechas(T fecha)
+        {
+            BuscarFecha(fecha).totalConsultas--;
         }
        
         private void InOrder(Nodo<T> padre, ref ColaRecorrido<T> queue)
@@ -327,8 +382,11 @@ namespace Lab03_ED_2022.Estructuras_de_datos
             {
                 InOrder(padre.left, ref queue);
 
-                queue.Encolar(padre.value);
-
+                if (CompararListas(padre.value) == 1)
+                {
+                    queue.Encolar(padre.value);
+                }
+                        
                 InOrder(padre.right, ref queue);
             }
             return;

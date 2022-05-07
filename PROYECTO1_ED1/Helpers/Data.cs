@@ -31,19 +31,19 @@ namespace PROYECTO1_ED1.Helpers
             CompararId = Delegado.CompararDPI,
             CompararFecha = Delegado.VerificarFecha,
             CompararNombres = Delegado.CompararNombres,
-            CompararFechaBuscar = Delegado.CompararFecha
+            CompararFechaBuscar = Delegado.CompararFecha,
+            ModificarFecha = Delegado.AsignarFecha,
+            CompararFechaAnterior = Delegado.VerificarFechaAnterior
+         
 
 
         };
 
         //arbol para guardar las fechas de consulta 
-        public Árbol<ModeloPaciente> FechasdeConsulta = new Árbol<ModeloPaciente>
+        public Árbol<Citas> FechasdeConsulta = new Árbol<Citas>
         {
-            Comparar = Delegado.CompararFecha,
-            CompararId = Delegado.CompararDPI,
-            CompararFecha = Delegado.VerificarFecha,
-            CompararNombres = Delegado.CompararNombres,
-            CompararFechaBuscar = Delegado.CompararFecha
+            Comparar = Delegado.CompararFechaCitas,
+            CompararFechaBuscar = Delegado.CompararFechaCitas
 
         };
 
