@@ -19,12 +19,15 @@ namespace PROYECTO1_ED1.Models
         public string Apellidos { get; set; }
 
         [Required]
+        [MaxLength (13)]
         public long DPI { get; set; }
 
         [Required]
+        [Range(0,150)]
         public int Edad { get; set; }
 
         [Required]
+        [MaxLength(8)]
         public long Teléfono { get; set; }
 
         [Required]
